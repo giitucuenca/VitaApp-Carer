@@ -1,0 +1,102 @@
+@import "../../../../assets/scss/mixins/respond-to";
+@import "../../../../assets/scss/variables";
+
+.panel {
+  overflow: hidden;
+  @include respond-md {
+    transition: width 0.5s;
+  }
+  .panel__content {
+    width: fit-content;
+  }
+}
+.container__nav {
+  background-color: $gray-900;
+  color: white;
+  height: 100%;
+  width: 100vw;
+  @include respond-md {
+    width: 80px;
+  }
+  @include respond-xl {
+    width: 250px;
+  }
+
+  @include respond-md {
+    .header__nav {
+      overflow-y: scroll;
+      height: 100vh;
+      position: sticky;
+      position: -webkit-sticky;
+      top: 0;
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+  .header__logo {
+    display: none;
+    @include respond-md {
+      display: block;
+      img {
+        width: 100%;
+        max-width: 120px;
+        @include respond-xl {
+          display: block;
+          margin: auto;
+        }
+      }
+    }
+  }
+  .nav__ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    @include respond-md {
+      justify-content: flex-start;
+      flex-direction: column;
+      text-align: center;
+    }
+    @include respond-xl {
+      text-align: start;
+    }
+
+    li {
+      cursor: pointer;
+
+      padding: 1rem 1.2rem;
+      font-size: 1.2rem;
+      transition: 0.3s;
+      &:hover {
+        color: $primary;
+      }
+      @include respond-xs {
+        padding: 1rem 1.5rem;
+      }
+
+      @include respond-md {
+        border-bottom: 2px solid $gray-600;
+      }
+
+      @include respond-xl {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.hidden__content {
+  display: none;
+  @include respond-xl {
+    display: inline;
+  }
+}
+
+.border-color-primary {
+  border-color: $primary !important;
+}

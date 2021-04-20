@@ -1,0 +1,54 @@
+<section #collapsePanel class="panel">
+  <div #panelContent class="panel__content">
+    <section class="container__nav">
+      <nav class="header__nav">
+        <div class="header__logo px-md-1 pt-md-3">
+          <img
+            class="img-fluid"
+            src="assets/Images/logo/logo_3.png"
+            alt="logo de vitaapp"
+          />
+          <img
+            class="img-fluid mt-2"
+            src="assets/Images/logo/u_c.png"
+            alt="Logo de la Universidad de Cuenca"
+          />
+        </div>
+        <ul class="nav__ul px-4 px-md-0">
+          <li
+            routerLink="/adulto-mayor"
+            routerLinkActive="border-color-primary"
+          >
+            <i class="flaticon flaticon-couple"></i
+            ><span class="hidden__content"> Agregar Adulto</span>
+          </li>
+          <li
+            routerLink="/asignar-tablero"
+            routerLinkActive="border-color-primary"
+          >
+            <i class="flaticon flaticon-bulletin-board"></i
+            ><span class="hidden__content"> Asignar Categorias</span>
+          </li>
+          <li
+            routerLink="panel/editar-categorias"
+            routerLinkActive="border-color-primary"
+          >
+            <i class="flaticon flaticon-edit"></i
+            ><span class="hidden__content"> Editar</span>
+          </li>
+          <li
+            routerLink="ayuda/crear-ayuda"
+            routerLinkActive="border-color-primary"
+          >
+            <i class="flaticon flaticon-help-1"></i
+            ><span class="hidden__content">Ayudas</span>
+          </li>
+          <li class="text-danger">
+            <i class="flaticon flaticon-logout"></i
+            ><span class="hidden__content"> Salir</span>
+          </li>
+        </ul>
+      </nav>
+    </section>
+  </div>
+</section>

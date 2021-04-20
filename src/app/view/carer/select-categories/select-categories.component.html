@@ -1,0 +1,40 @@
+<div class="header__info">Seleccione</div>
+<section class="global__container">
+  <div class="categories__container">
+    <p-splitter
+      [style]="{ height: '100%' }"
+      styleClass="p-mb-5"
+      layout="vertical"
+    >
+      <ng-template class="content_global" pTemplate>
+        <div class="p-col content_p-panel">
+          <div class="h4"><small>Categorias Seleccionadas</small></div>
+          <hr />
+          <div class="content__cards">
+            <div class="content__card" *ngFor="let item of [1, 1, 1]">
+              <div>
+                <app-card [categoryView]="category"></app-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate>
+        <div class="p-col content_p-panel">
+          <div class="h4"><small>Categorias</small></div>
+          <hr />
+          <div class="content__cards">
+            <div class="content__card" *ngFor="let item of [1, 1, 1]">
+              <div>
+                <app-card [categoryView]="category"></app-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-splitter>
+  </div>
+</section>
+<section class="submenu">
+  <app-submenu [showEdit]="true" (clickEdit)="showOption()"></app-submenu>
+</section>

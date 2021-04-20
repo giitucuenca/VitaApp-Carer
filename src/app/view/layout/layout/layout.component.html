@@ -1,0 +1,18 @@
+<header class="layout__header">
+  <section class="collapse__panel">
+    <div class="panel__action" (click)="collapse()">
+      <i
+        [ngClass]="
+          isCollapsed
+            ? 'pi pi-chevron-right'
+            : 'pi pi-chevron-right fa-rotate-180'
+        "
+      ></i>
+    </div>
+    <app-header #collapsePanel></app-header>
+  </section>
+</header>
+
+<content id="layoutContent" class="layout__content">
+  <router-outlet style="min-height: 100%"> </router-outlet>
+</content>

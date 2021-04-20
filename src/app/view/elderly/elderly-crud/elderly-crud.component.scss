@@ -1,0 +1,22 @@
+@import "../../../../assets/scss/mixins/respond-to";
+.container__global {
+  max-width: 700px;
+}
+
+.elderly__list {
+  max-width: 700px;
+  th.col__1 {
+    width: 60%;
+  }
+  th.col__2 {
+    width: 40%;
+  }
+  @include respond-sm {
+    th.col__1 {
+      width: 80%;
+    }
+    th.col__2 {
+      width: 20%;
+    }
+  }
+}

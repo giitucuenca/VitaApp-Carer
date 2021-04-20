@@ -1,0 +1,70 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins/respond-to";
+.select-categories__container {
+  .title-container {
+    height: $height-header-top;
+    padding: 0.5rem;
+    position: relative;
+    border-bottom: 1px solid $gray-300;
+    .panel-close {
+      position: absolute;
+      left: 1rem;
+      top: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      @include respond-md {
+        display: none;
+      }
+    }
+  }
+  .bg-black {
+    background-color: $gray-900;
+    color: white;
+  }
+  .users {
+    width: 100%;
+    overflow: hidden;
+
+    @include respond-md {
+      width: 30% !important;
+      height: auto !important;
+      min-height: 100vh;
+      border-right: 1px solid $gray-300;
+    }
+    @include respond-lg {
+      width: 20% !important;
+    }
+
+    .user {
+      padding: 0.5rem;
+      border-bottom: 1px solid $gray-300;
+      cursor: pointer;
+    }
+  }
+
+  .categories {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    @include respond-md {
+      width: 70% !important;
+      height: auto !important;
+    }
+    @include respond-lg {
+      width: 80% !important;
+    }
+    .category {
+      padding: 0.5rem;
+      border: 1px solid $gray-900;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.form-check-input {
+  width: 3em;
+  height: 1.5em;
+}

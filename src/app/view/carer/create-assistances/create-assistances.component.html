@@ -1,0 +1,30 @@
+<section class="container container__global">
+  <section class="form__add">
+    <p-fieldset
+      p-fieldset
+      legend="Agregar Ayuda"
+      [toggleable]="true"
+      [collapsed]="true"
+    >
+      <app-elderly-add></app-elderly-add>
+    </p-fieldset>
+  </section>
+  <section class="form__add">
+    <app-collapse-panel #updatePanel>
+      <app-elderly-add></app-elderly-add>
+    </app-collapse-panel>
+  </section>
+  <section class="mt-5">
+    <div class="content__cards">
+      <div class="content__card" *ngFor="let item of [1, 1, 1]; let i = index">
+        <div>
+          <app-card
+            [category]="category"
+            (clickEdit)="updateCategory(i)"
+            (clickContent)="showSelectAsistense(i)"
+          ></app-card>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

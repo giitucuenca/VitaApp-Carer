@@ -1,0 +1,37 @@
+<section>
+  <nav class="nav__top">
+    <ul>
+      <li>
+        <button
+          type="button"
+          class="btn"
+          role="button"
+          [routerLink]="['/panel/seleccionar-subcategorias', 1]"
+        >
+          <i class="flaticon flaticon-plus"></i> Selecionar
+        </button>
+      </li>
+    </ul>
+  </nav>
+</section>
+<section class="container container__global">
+  <section class="form__add">
+    <app-collapse-panel #updatePanel>
+      <app-elderly-add></app-elderly-add>
+    </app-collapse-panel>
+  </section>
+  <hr />
+  <section>
+    <div class="content__cards">
+      <div class="content__card" *ngFor="let item of [1, 1, 1]; let i = index">
+        <div>
+          <app-card
+            [category]="category"
+            (clickEdit)="updateSubcategory(i)"
+            (clickContent)="showPictograms(i)"
+          ></app-card>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

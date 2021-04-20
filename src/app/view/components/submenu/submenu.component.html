@@ -1,0 +1,35 @@
+<section #collapsePanel class="panel pe-4">
+  <div class="open-menu__btn bg-dark" *ngIf="isCollapsed" (click)="collapse()">
+    <i class="pi pi-chevron-right fa-rotate-180"></i>
+  </div>
+  <div #panelContent class="panel__content">
+    <div class="mb-2" *ngIf="showEdit">
+      <button
+        type="button"
+        class="btn btn-dark btn__float"
+        (click)="clickedEdit()"
+      >
+        <i class="pi pi-pencil"></i>
+      </button>
+    </div>
+    <div class="mb-2">
+      <button
+        type="button"
+        class="btn btn-dark btn__float"
+        (click)="clickedSave()"
+      >
+        <i class="pi pi-save"></i>
+      </button>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center">
+      <button
+        type="button"
+        class="btn btn-dark btn__close"
+        (click)="collapse()"
+      >
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+  </div>
+</section>

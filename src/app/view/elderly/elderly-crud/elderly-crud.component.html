@@ -1,0 +1,58 @@
+<!-- <section>
+  <nav class="nav__top">
+    <ul>
+      <li>
+        <button
+          type="button"
+          class="btn"
+          role="button"
+          (click)="setShowAddElderly()"
+        >
+          <i class="flaticon flaticon-plus"></i> Agregar Adulto
+        </button>
+      </li>
+    </ul>
+  </nav>
+</section> -->
+<section class="container container__global">
+  <section class="form__add">
+    <p-fieldset
+      p-fieldset
+      legend="Agregar Adulto"
+      [toggleable]="true"
+      [collapsed]="true"
+    >
+      <app-elderly-add></app-elderly-add>
+    </p-fieldset>
+  </section>
+  <section class="form__add">
+    <app-collapse-panel #updatePanel>
+      <app-elderly-add></app-elderly-add>
+    </app-collapse-panel>
+  </section>
+  <section class="elderly__list container mt-4">
+    <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col" class="col__1"><h4 class="m-0">Adulto</h4></th>
+          <th scope="col" class="col__2"><h4 class="m-0">Gestion</h4></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of [1, 1, 1]">
+          <th scope="col">
+            <h4><small>Juan Perez</small></h4>
+            <p>User Name</p>
+          </th>
+          <th scope="col">
+            <button class="btn btn-warning text-white me-2">
+              <i class="fas fa-edit" (click)="updateElderly()"></i></button
+            ><button class="btn btn-danger text-white">
+              <i class="fas fa-trash"></i>
+            </button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</section>

@@ -1,0 +1,53 @@
+<section>
+  <nav class="nav__top">
+    <ul>
+      <li>
+        <button
+          type="button"
+          class="btn"
+          role="button"
+          [routerLink]="['/panel/seleccionar-pictogramas', 1]"
+        >
+          <i class="flaticon flaticon-plus"></i> Selecionar
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="btn"
+          role="button"
+          [routerLink]="['/panel/seleccionar-pictogramas', 1]"
+        >
+          <i class="flaticon flaticon-plus"></i> Editar Cuadricula
+        </button>
+      </li>
+    </ul>
+  </nav>
+</section>
+<section class="container container__global">
+  <section class="form__add">
+    <app-collapse-panel #updatePanel>
+      <app-elderly-add></app-elderly-add>
+    </app-collapse-panel>
+  </section>
+  <hr />
+  <section>
+    <div class="content__cards">
+      <div
+        class="content-pictogram__card"
+        *ngFor="let item of [1, 1, 1, 1, 1, 1, 1, 1, 1]; let i = index"
+      >
+        <div>
+          <app-card
+            [pictogramView]="pictogram"
+            (clickEdit)="updatePictogram(i)"
+          ></app-card>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="submenu">
+  <app-submenu [showEdit]="true"></app-submenu>
+</section>

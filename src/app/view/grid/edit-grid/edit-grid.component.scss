@@ -1,0 +1,8 @@
+.global__container {
+  display: flex;
+  min-height: calc(100vh - 48px - 52px);
+  flex-direction: column;
+  .grid__content {
+    flex: 1 1 auto;
+  }
+}

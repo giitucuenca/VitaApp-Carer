@@ -1,0 +1,40 @@
+<section class="select-categories__container d-flex">
+  <div class="users" #usersContainer>
+    <h4 class="title-container">Adultos Mayores</h4>
+    <div
+      class="user"
+      (click)="openCategories()"
+      *ngFor="let item of [1, 1, 1, 1, 1, 1]"
+    >
+      <strong class="mb-2 d-block">Luis Alberto</strong>
+      <small>User name</small>
+    </div>
+  </div>
+  <div class="categories" #categoriesContainer>
+    <div>
+      <h4 class="title-container bg-black text-end">
+        <i (click)="openCategories()" class="panel-close fas fa-times"></i>Luis
+        Alberto
+      </h4>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div
+          class="col-12 col-md-12 col-lg-6 col-xl-4"
+          *ngFor="let item of [1, 1, 1, 1, 1, 1]"
+        >
+          <div class="category">
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="flexSwitchCheckDefault"
+              />
+            </div>
+            <app-card [category]="category"></app-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

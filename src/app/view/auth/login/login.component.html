@@ -1,0 +1,171 @@
+<header class="header__login">
+  <div class="header__logos">
+    <div class="header__logo">
+      <img src="assets/Images/logo/logo_2.png" alt="Logo de vitaapp" />
+    </div>
+    <div class="header__logo logo__hidden">
+      <img
+        src="assets/Images/logo/u_c.png"
+        alt="Logo de la Universidad de Cuenca"
+      />
+    </div>
+  </div>
+</header>
+<content>
+  <div class="form__auth">
+    <div #formLoginContainer class="login__form animate__animated">
+      <div class="form__header">
+        <h2>Iniciar sesión</h2>
+      </div>
+      <form
+        class="container-fluid"
+        [formGroup]="formLogin"
+        (ngSubmit)="logIn()"
+      >
+        <div class="mb-3">
+          <label class="form-label" for="login-email">Correo Electrónico</label>
+          <div class="input__border">
+            <input
+              type="email"
+              name="email"
+              id="login-email"
+              class="form-control"
+              placeholder="Ingrese su correo electrónico."
+              aria-describedby="helpId"
+              formControlName="email"
+              [class.is-invalid]="invalidEmail"
+            />
+          </div>
+
+          <small *ngIf="invalidEmail" id="helpId" class="text-danger"
+            >Correo Incorrecto</small
+          >
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="login-password">Contraseña</label>
+          <div class="input__border">
+            <input
+              type="password"
+              name="password"
+              id="login-password"
+              class="form-control"
+              placeholder="Ingrese su contraseña."
+              aria-describedby="helpId"
+              formControlName="password"
+              [class.is-invalid]="invalidPassword"
+            />
+          </div>
+          <small *ngIf="invalidPassword" id="helpId" class="text-danger"
+            >Contraseña Incorrecto</small
+          >
+        </div>
+        <div class="text-center mb-3">
+          <a class="a__click" (click)="openRegister()">Registrate</a>
+        </div>
+        <button type="submit" class="btn btn-primary container-fluid">
+          Iniciar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="form__auth">
+    <div
+      #formRegisterContainer
+      class="register__form animate__animated init__left"
+    >
+      <div class="form__header">
+        <h2>Iniciar sesión</h2>
+      </div>
+      <form
+        class="container-fluid"
+        [formGroup]="formLogin"
+        (ngSubmit)="logIn()"
+      >
+        <div class="mb-3">
+          <label class="form-label" for="">Nombre</label>
+          <div class="input__border">
+            <input
+              type="text"
+              class="form-control"
+              name=""
+              id=""
+              aria-describedby="helpId"
+              placeholder="Ingrese sus nombres,"
+            />
+          </div>
+
+          <small id="helpId" class="form-text text-muted">Help text</small>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="">Apellido</label>
+          <div class="input__border">
+            <input
+              type="text"
+              class="form-control"
+              name=""
+              id=""
+              aria-describedby="helpId"
+              placeholder="Ingrese sus nombres,"
+            />
+          </div>
+
+          <small id="helpId" class="form-text text-muted">Help text</small>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="login-email">Correo Electrónico</label>
+          <div class="input__border">
+            <input
+              type="email"
+              name="email"
+              id="register-email"
+              class="form-control"
+              placeholder="Ingrese su correo electrónico."
+              aria-describedby="helpId"
+              formControlName="email"
+              [class.is-invalid]="invalidEmail"
+            />
+          </div>
+
+          <small *ngIf="invalidEmail" id="helpId" class="text-danger"
+            >Correo Incorrecto</small
+          >
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="login-password">Contraseña</label>
+          <div class="input__border">
+            <input
+              type="password"
+              name="password"
+              id="login-password"
+              class="form-control"
+              placeholder="Ingrese su contraseña."
+              aria-describedby="helpId"
+              formControlName="password"
+              [class.is-invalid]="invalidPassword"
+            />
+          </div>
+          <small *ngIf="invalidPassword" id="helpId" class="text-danger"
+            >Contraseña Incorrecto</small
+          >
+        </div>
+        <div class="text-center mb-3">
+          <a class="a__click" (click)="openLogin()">Iniciar Sesión</a>
+        </div>
+        <button type="submit" class="btn btn-primary container-fluid">
+          Iniciar
+        </button>
+      </form>
+    </div>
+  </div>
+  <app-grid-drag-drop></app-grid-drag-drop>
+</content>
+<footer class="d-flex align-items-center justify-content-center text-white">
+  VitaApp - {{ date | date: "yyyy" }}
+</footer>
+
+<app-modal
+  #modal
+  [modalTitle]="'hola'"
+  [modalContent]="'modal content'"
+></app-modal>

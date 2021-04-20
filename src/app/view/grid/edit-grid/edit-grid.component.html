@@ -1,0 +1,56 @@
+<section>
+  <nav class="nav__top">
+    <ul>
+      <li>
+        <button
+          type="button"
+          class="btn"
+          role="button"
+          [routerLink]="['/panel/editar-pictogramas', 1]"
+        >
+          <i class="flaticon flaticon-plus"></i> Pictogramas
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="btn"
+          role="button"
+          [routerLink]="['ayuda/crear-ayuda']"
+        >
+          <i class="flaticon flaticon-plus"></i> Ayudas
+        </button>
+      </li>
+    </ul>
+  </nav>
+</section>
+<div class="container-fluid global__container">
+  <section class="seleccion-ayudas w-100 pt-3">
+    <div class="row flex-column-reverse flex-md-row">
+      <div class="col-12 col-md-6">
+        <label for="" class="m-2">Seleccionar Ayuda</label>
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div
+          class="alert alert-warning h-100 d-flex align-items-center"
+          role="alert"
+        >
+          Recuerde que la ayuda seleccionada se usara en toda la categoria.
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="grid__content">
+    <div class="ayudas">
+      <app-grid-drag-drop></app-grid-drag-drop>
+    </div>
+    <div class="pictogramas">hola mundo</div>
+  </section>
+</div>

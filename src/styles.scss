@@ -142,7 +142,7 @@ input[type="radio"] {
 
   .p-fieldset-legend {
     list-style-type: none;
-    display: flex;
+    // display: flex;
     margin: 0;
     .ng-star-inserted {
       padding-left: 0.3rem;
@@ -156,7 +156,7 @@ input[type="radio"] {
       font-size: $font-size-base;
       &::after {
         position: absolute;
-        z-index: 1200;
+        z-index: 20;
         bottom: 0px;
         left: 0;
         content: "";
@@ -256,6 +256,33 @@ input[type="radio"] {
 
     @include respond-xl {
       width: calc(12.5% - #{$gap});
+    }
+
+    & > div {
+      width: 100%;
+    }
+  }
+
+  .content-pictogram-grid__card {
+    @include gap-separation;
+    width: calc(33.33333% - #{$gap});
+    @include respond-xs {
+      width: calc(25% - #{$gap});
+    }
+    @include respond-sm {
+      width: calc(20% - #{$gap});
+    }
+
+    @include respond-md {
+      width: calc(25% - #{$gap});
+    }
+
+    @include respond-lg {
+      width: calc(20% - #{$gap});
+    }
+
+    @include respond-xl {
+      width: calc(16.6666% - #{$gap});
     }
 
     & > div {

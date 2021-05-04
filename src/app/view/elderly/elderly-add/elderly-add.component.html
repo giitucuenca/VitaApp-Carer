@@ -1,5 +1,10 @@
 <h3>Agregar a un adulto mayor</h3>
-<form class="row g-3 needs-validation" novalidate>
+<form
+  class="row g-3 needs-validation"
+  novalidate
+  [formGroup]="formElderly"
+  (ngSubmit)="saveElderly()"
+>
   <div class="col-12">
     <label for="elderlyFormAddName" class="form-label">Nombre del Adulto</label>
     <div class="input__border">
@@ -8,10 +13,12 @@
         class="form-control"
         id="elderlyFormAddName"
         placeholder="Ingrese el nombre."
+        formControlName="name"
+        [class.is-invalid]="invalidName"
       />
     </div>
 
-    <div class="form__feedback text-danger mt-1">
+    <div *ngIf="invalidName" class="form__feedback text-danger mt-1">
       <small>Esta información es requerida.</small>
     </div>
   </div>
@@ -26,9 +33,11 @@
         class="form-control"
         id="elderlyFormAddSurname"
         placeholder="Ingrese los apellidos."
+        formControlName="surname"
+        [class.is-invalid]="invalidSurname"
       />
     </div>
-    <div class="form__feedback text-danger mt-1">
+    <div *ngIf="invalidSurname" class="form__feedback text-danger mt-1">
       <small>Esta información es requerida.</small>
     </div>
   </div>
@@ -42,54 +51,31 @@
         class="form-control"
         id="elderlyFormAddEmail"
         aria-describedby="inputGroupPrepend"
-        placeholder="Xavier0312"
+        placeholder="ej. Xavier0312 (Solo letras y numeros)"
+        formControlName="username"
+        [class.is-invalid]="invalidUsername"
       />
     </div>
-    <div class="form__feedback text-danger mt-1">
-      <small>Esta información es requerida.</small>
+    <div *ngIf="invalidUsername" class="form__feedback text-danger mt-1">
+      <small>Esta información es requerida. (Solo letras y numeros)</small>
     </div>
   </div>
-  <!-- <div class="col-md-6">
-    <label for="validationCustom03" class="form-label">Contraseña</label>
-    <div class="input__border">
-      <input
-        type="password"
-        class="form-control"
-        id="validationCustom03"
-        placeholder="Ingrese una contraseña que sea facil del recordar."
-
-      />
-    </div>
-    <div class="form__feedback text-danger mt-1">
-      <small>Revise la información proporcionada</small>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <label for="validationCustom03" class="form-label"
-      >Repita la Contraseña.</label
-    >
-    <div class="input__border">
-      <input
-        type="password"
-        class="form-control"
-        id="validationCustom03"
-        placeholder="Repita la contraseña"
-
-      />
-    </div>
-    <div class="form__feedback text-danger mt-1">
-      <small>Las contraseñas no coinciden.</small>
-    </div>
-  </div> -->
   <div class="col-12 col-sm-6">
-    <label for="validationCustom04" class="form-label">Escolaridad</label>
-    <select class="form-select" id="validationCustom04">
+    <label for="elderlyFormAddLevelScholarity" class="form-label"
+      >Escolaridad</label
+    >
+    <select
+      class="form-select"
+      id="elderlyFormAddLevelScholarity"
+      formControlName="scholarityId"
+      [class.is-invalid]="invalidScholarity"
+    >
       <option selected disabled value="">Elija</option>
-      <option value="1">Basica</option>
-      <option value="2">Secundaria</option>
-      <option value="3">Universitaria</option>
+      <option *ngFor="let level of levels" [value]="level.id">
+        {{ level.name }}
+      </option>
     </select>
-    <div class="form__feedback text-danger mt-1">
+    <div *ngIf="invalidScholarity" class="form__feedback text-danger mt-1">
       <small>Esta información es requerida.</small>
     </div>
   </div>
@@ -100,9 +86,9 @@
         <input
           class="form-check-input"
           type="radio"
-          name="elderlyFormAddLaterality"
           id="elderlyFormAddLaterality1"
           value="d"
+          formControlName="laterality"
         />
         <label class="form-check-label" for="elderlyFormAddLaterality1"
           >Diestro (Derecha)</label
@@ -112,9 +98,9 @@
         <input
           class="form-check-input"
           type="radio"
-          name="elderlyFormAddLaterality"
           id="elderlyFormAddLaterality2"
           value="z"
+          formControlName="laterality"
         />
         <label class="form-check-label" for="elderlyFormAddLaterality2"
           >Zurdo (Izquieda)</label
@@ -129,9 +115,9 @@
         <input
           class="form-check-input"
           type="radio"
-          name="elderlyFormAddGender"
           id="elderlyFormAddGender1"
-          value="d"
+          value="m"
+          formControlName="gender"
         />
         <label class="form-check-label" for="elderlyFormAddGender1"
           >Hombre</label
@@ -141,9 +127,9 @@
         <input
           class="form-check-input"
           type="radio"
-          name="elderlyFormAddGender"
           id="elderlyFormAddGender2"
-          value="z"
+          value="f"
+          formControlName="gender"
         />
         <label class="form-check-label" for="elderlyFormAddGender2"
           >Mujer</label
@@ -151,7 +137,7 @@
       </div>
     </div>
   </div>
-  <div class="col-6">
+  <!-- <div class="col-6">
     <div class="form-check">
       <input
         class="form-check-input"
@@ -163,8 +149,10 @@
         Cuenta con alguna discapacidad.
       </label>
     </div>
-  </div>
+  </div> -->
   <div class="col-12 text-center">
     <button class="btn btn-primary" type="submit">Agregar Adulto</button>
   </div>
 </form>
+
+<p-toast key="toastElderlyAdd" position="top-right"></p-toast>

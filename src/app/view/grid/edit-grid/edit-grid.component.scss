@@ -1,8 +1,20 @@
+@import "../../../../assets/scss/mixins/respond-to";
 .global__container {
   display: flex;
   min-height: calc(100vh - 48px - 52px);
   flex-direction: column;
   .grid__content {
     flex: 1 1 auto;
+    padding-left: 1rem;
+    @include respond-md {
+      padding-left: 0;
+      display: flex;
+      flex-direction: row;
+      .ayudas,
+      .pictogramas {
+        width: 50%;
+        overflow-y: scroll;
+      }
+    }
   }
 }

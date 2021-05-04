@@ -17,8 +17,6 @@ header.header__login {
     transform: translate(-50%, -50%);
     @include respond-lg {
       left: 1rem;
-
-      transform: translate(0%, -50%);
     }
 
     .logo__hidden {

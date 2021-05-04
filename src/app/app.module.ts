@@ -37,6 +37,8 @@ import { SelectPictogramsComponent } from './view/carer/select-pictograms/select
 import { EditGridComponent } from './view/grid/edit-grid/edit-grid.component';
 import { GridDragDropComponent } from './view/grid/grid-drag-drop/grid-drag-drop.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -78,8 +80,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     SplitterModule,
     ButtonModule,
     DragDropModule,
+    ToastModule,
   ],
   providers: [
+    MessageService,
+    ConfirmationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

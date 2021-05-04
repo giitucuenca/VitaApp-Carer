@@ -16,6 +16,7 @@ import { SelectCategoriesComponent } from './carer/select-categories/select-cate
 import { SelectSubcategoriesComponent } from './carer/select-subcategories/select-subcategories.component';
 import { SelectPictogramsComponent } from './carer/select-pictograms/select-pictograms.component';
 import { EditGridComponent } from './grid/edit-grid/edit-grid.component';
+import { AuthGuard } from '../services/guard/auth.guard';
 
 export const routes: Routes = [
   {
@@ -92,7 +93,7 @@ export const routes: Routes = [
         ],
       },
     ],
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: '**',

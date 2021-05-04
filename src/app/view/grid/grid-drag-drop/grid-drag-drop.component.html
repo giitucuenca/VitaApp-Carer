@@ -1,21 +1,16 @@
-<ul class="example-list">
-  <li *ngFor="let item of items">{{ item }}</li>
-</ul>
-
-<div class="example-container" cdkDropListGroup>
-  <div
-    cdkDropList
-    [cdkDropListEnterPredicate]="dropListEnterPredicate"
-    (cdkDropListDropped)="dropListDropped($event)"
-  ></div>
-  <div
-    cdkDropList
-    *ngFor="let item of items"
-    [cdkDropListEnterPredicate]="dropListEnterPredicate"
-    (cdkDropListDropped)="dropListDropped($event)"
-  >
-    <div cdkDrag class="example-box" (cdkDragMoved)="dragMoved($event)">
-      {{ item }}
+<div #contenedor class="content__cards" cdkDropListGroup>
+  <ng-container *ngFor="let item of items; let i = index">
+    <div
+      class="content-pictogram-grid__card"
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      [cdkDropListData]="{ item: item, index: i }"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div cdkDrag>
+        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+        <app-card [pictogramView]="pictogram"></app-card>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>

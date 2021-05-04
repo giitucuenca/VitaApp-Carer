@@ -75,59 +75,65 @@
       class="register__form animate__animated init__left"
     >
       <div class="form__header">
-        <h2>Iniciar sesión</h2>
+        <h2>Registrarse</h2>
       </div>
       <form
         class="container-fluid"
-        [formGroup]="formLogin"
-        (ngSubmit)="logIn()"
+        [formGroup]="formRegister"
+        (ngSubmit)="register()"
       >
         <div class="mb-3">
-          <label class="form-label" for="">Nombre</label>
+          <label class="form-label" for="formResgisterName">Nombre</label>
           <div class="input__border">
             <input
               type="text"
               class="form-control"
-              name=""
-              id=""
+              id="formResgisterName"
               aria-describedby="helpId"
-              placeholder="Ingrese sus nombres,"
+              placeholder="Ingrese sus nombres."
+              formControlName="name"
+              [class.is-invalid]="invalidName"
             />
           </div>
 
-          <small id="helpId" class="form-text text-muted">Help text</small>
+          <small id="helpId" class="form-text text-danger" *ngIf="invalidName"
+            >Ingrese sus nombres.</small
+          >
         </div>
         <div class="mb-3">
-          <label class="form-label" for="">Apellido</label>
+          <label class="form-label" for="formRegisterSurname">Apellido</label>
           <div class="input__border">
             <input
               type="text"
               class="form-control"
-              name=""
-              id=""
-              aria-describedby="helpId"
-              placeholder="Ingrese sus nombres,"
+              id="formRegisterSurname"
+              placeholder="Ingrese sus apellidos."
+              formControlName="surname"
+              [class.is-invalid]="invalidSurname"
             />
           </div>
 
-          <small id="helpId" class="form-text text-muted">Help text</small>
+          <small class="form-text text-danger" *ngIf="invalidSurname"
+            >Ingrese sus apellidos.</small
+          >
         </div>
         <div class="mb-3">
-          <label class="form-label" for="login-email">Correo Electrónico</label>
+          <label class="form-label" for="formRegisterEmail"
+            >Correo Electrónico</label
+          >
           <div class="input__border">
             <input
               type="email"
               name="email"
-              id="register-email"
+              id="formRegisterEmail"
               class="form-control"
               placeholder="Ingrese su correo electrónico."
-              aria-describedby="helpId"
               formControlName="email"
-              [class.is-invalid]="invalidEmail"
+              [class.is-invalid]="invalidEmailRegister"
             />
           </div>
 
-          <small *ngIf="invalidEmail" id="helpId" class="text-danger"
+          <small *ngIf="invalidEmailRegister" class="text-danger"
             >Correo Incorrecto</small
           >
         </div>
@@ -140,25 +146,23 @@
               id="login-password"
               class="form-control"
               placeholder="Ingrese su contraseña."
-              aria-describedby="helpId"
               formControlName="password"
-              [class.is-invalid]="invalidPassword"
+              [class.is-invalid]="invalidPasswordRegister"
             />
           </div>
-          <small *ngIf="invalidPassword" id="helpId" class="text-danger"
-            >Contraseña Incorrecto</small
+          <small *ngIf="invalidPasswordRegister" class="text-danger"
+            >Contraseña Incorrecta</small
           >
         </div>
         <div class="text-center mb-3">
           <a class="a__click" (click)="openLogin()">Iniciar Sesión</a>
         </div>
         <button type="submit" class="btn btn-primary container-fluid">
-          Iniciar
+          Registrar
         </button>
       </form>
     </div>
   </div>
-  <app-grid-drag-drop></app-grid-drag-drop>
 </content>
 <footer class="d-flex align-items-center justify-content-center text-white">
   VitaApp - {{ date | date: "yyyy" }}
@@ -169,3 +173,5 @@
   [modalTitle]="'hola'"
   [modalContent]="'modal content'"
 ></app-modal>
+
+<p-toast key="toastLogin" position="top-right"></p-toast>

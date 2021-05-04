@@ -6,4 +6,5 @@ export interface PictogramGet {
   imageUrl: string;
   subcategoryId: number;
   color: string;
+  position?: number;
 }

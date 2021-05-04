@@ -39,10 +39,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let i of [1, 1, 1]">
+        <tr *ngFor="let elderly of elderlies">
           <th scope="col">
-            <h4><small>Juan Perez</small></h4>
-            <p>User Name</p>
+            <h4>
+              <small>{{ elderly.name }}</small>
+            </h4>
+            <p>{{ elderly.username }}</p>
           </th>
           <th scope="col">
             <button class="btn btn-warning text-white me-2">

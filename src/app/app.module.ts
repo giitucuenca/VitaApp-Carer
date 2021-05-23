@@ -39,6 +39,25 @@ import { GridDragDropComponent } from './view/grid/grid-drag-drop/grid-drag-drop
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { MessageNotContentComponent } from './view/components/message-not-content/message-not-content.component';
+import { AddHelperComponent } from './view/forms/helpers/add-helper/add-helper.component';
+import { EditHelperComponent } from './view/forms/helpers/edit-helper/edit-helper.component';
+import { EditCategoryComponent } from './view/forms/category/edit-category/edit-category.component';
+import { EditSubcategoryComponent } from './view/forms/subcategory/edit-subcategory/edit-subcategory.component';
+import { EditPictogramComponent } from './view/forms/pictogram/edit-pictogram/edit-pictogram.component';
+import { PageNotFoundComponent } from './view/components/page-not-found/page-not-found.component';
+import { MessagesComponent } from './view/components/messages/messages.component';
+import { DragExampleComponent } from './view/grid/drag-example/drag-example.component';
+import { ImagesRadioComponent } from './view/components/images-radio/images-radio.component';
+import { EditPictogramHelperComponent } from './view/forms/helpers/edit-pictogram-helper/edit-pictogram-helper.component';
+import { ElderlyEditComponent } from './view/elderly/elderly-edit/elderly-edit.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
+// Firebase services + enviorment module
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -67,6 +86,18 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     SelectPictogramsComponent,
     EditGridComponent,
     GridDragDropComponent,
+    MessageNotContentComponent,
+    AddHelperComponent,
+    EditHelperComponent,
+    EditCategoryComponent,
+    EditSubcategoryComponent,
+    EditPictogramComponent,
+    PageNotFoundComponent,
+    ImagesRadioComponent,
+    MessagesComponent,
+    DragExampleComponent,
+    EditPictogramHelperComponent,
+    ElderlyEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +112,10 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     ButtonModule,
     DragDropModule,
     ToastModule,
+    ConfirmDialogModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
   ],
   providers: [
     MessageService,

@@ -14,24 +14,69 @@
     </ul>
   </nav>
 </section>
+<section class="mt-4 container">
+  <h2 class="title">{{ pageCurrent }}</h2>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-bg">
+      <li
+        [ngClass]="
+          i === 0 ? 'breadcrumb-item m-0 active' : 'breadcrumb-item h2 m-0'
+        "
+        *ngFor="let item of subMenuNavigation; let i = index"
+      >
+        {{ item }}
+      </li>
+    </ol>
+  </nav>
+</section>
 <section class="container container__global">
   <section class="form__add">
-    <app-collapse-panel #updatePanel>
-      <app-elderly-add></app-elderly-add>
+    <app-collapse-panel #panel>
+      <app-edit-category
+        #editCategory
+        (collapse)="collapsePanel()"
+        (reloadCategories)="getCategoriesCarer()"
+      ></app-edit-category>
     </app-collapse-panel>
   </section>
-  <hr />
-  <section>
+
+  <section class="mt-4">
     <div class="content__cards">
-      <div class="content__card" *ngFor="let item of [1, 1, 1]; let i = index">
+      <div
+        class="content__card"
+        *ngFor="let category of categoriesCarer; let i = index"
+      >
         <div>
           <app-card
             [category]="category"
-            (clickEdit)="updateCategory(i)"
-            (clickContent)="showSubcategories(i)"
+            (clickEdit)="updateCategory(category)"
+            (clickContent)="showSubcategories(category.categoryCarerId)"
+            (clickDelete)="deleteCategory(category.categoryCarerId)"
           ></app-card>
         </div>
       </div>
     </div>
   </section>
+  <app-message-not-content
+    *ngIf="!categoriesCarer.length"
+  ></app-message-not-content>
 </section>
+
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  key="positionDialog"
+  [position]="'top'"
+  [baseZIndex]="10000"
+  #cd
+>
+  <p-footer>
+    <button type="button" class="btn btn-primary" (click)="cd.reject()">
+      <i class="pi pi-times"></i> Cancelar
+    </button>
+    <button type="button" class="btn btn-primary" (click)="cd.accept()">
+      <i class="pi pi-check"></i> Aceptar
+    </button>
+  </p-footer>
+</p-confirmDialog>
+
+<p-toast key="toastCategory" position="top-right"></p-toast>

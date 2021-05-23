@@ -1,3 +1,12 @@
+<nav class="nav__top">
+  <ul>
+    <li>
+      <button type="button" class="btn" role="button" (click)="showOption()">
+        <i class="flaticon flaticon-plus"></i> Editar Ayudas
+      </button>
+    </li>
+  </ul>
+</nav>
 <section class="global__container">
   <div class="categories__container">
     <p-splitter
@@ -12,10 +21,14 @@
           <div class="content__cards">
             <div
               class="content-pictogram__card"
-              *ngFor="let item of [1, 1, 1, 1, 1, 1, 1, 1]"
+              *ngFor="let pictogram of pictogramsHelperCarer; let i = index"
             >
               <div>
-                <app-card [pictogramView]="pictogram"></app-card>
+                <app-card
+                  [pictogramView]="pictogram"
+                  [showClose]="true"
+                  (clickDelete)="deletePictogramCarer(i)"
+                ></app-card>
               </div>
             </div>
           </div>
@@ -26,9 +39,15 @@
           <div class="h4"><small>Ayudas</small></div>
           <hr />
           <div class="content__cards">
-            <div class="content-pictogram__card" *ngFor="let item of [1, 1, 1]">
+            <div
+              class="content-pictogram__card"
+              *ngFor="let pictogram of pictogramsHelper"
+            >
               <div>
-                <app-card [pictogramView]="pictogram"></app-card>
+                <app-card
+                  [pictogramView]="pictogram"
+                  (clickContent)="addPictogramCarer(pictogram)"
+                ></app-card>
               </div>
             </div>
           </div>
@@ -41,6 +60,7 @@
 <section class="submenu">
   <app-submenu
     [showEdit]="true"
-    (clickEdit)="editPictogramsAssistance()"
+    (clickEdit)="showOption()"
+    (clickSave)="saveListPictograms()"
   ></app-submenu>
 </section>

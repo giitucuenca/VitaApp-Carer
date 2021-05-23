@@ -2,39 +2,51 @@
   <div class="users" #usersContainer>
     <h4 class="title-container">Adultos Mayores</h4>
     <div
-      class="user"
-      (click)="openCategories()"
-      *ngFor="let item of [1, 1, 1, 1, 1, 1]"
+      [ngClass]="i === indexActive ? 'user bg-active' : 'user'"
+      (click)="changeElderly(i)"
+      *ngFor="let elderly of elderlies; let i = index"
     >
-      <strong class="mb-2 d-block">Luis Alberto</strong>
-      <small>User name</small>
+      <strong class="mb-2 d-block"
+        >{{ elderly.name }} {{ elderly.surname }}</strong
+      >
+      <small>{{ elderly.username }}</small>
     </div>
   </div>
   <div class="categories" #categoriesContainer>
     <div>
       <h4 class="title-container bg-black text-end">
-        <i (click)="openCategories()" class="panel-close fas fa-times"></i>Luis
-        Alberto
+        <i (click)="openCategories()" class="panel-close fas fa-times"></i>
+        <span *ngIf="elderlyActive"
+          >{{ elderlyActive.name }} {{ elderlyActive.surname }}</span
+        >
       </h4>
     </div>
     <div class="container-fluid">
       <div class="row">
         <div
           class="col-12 col-md-12 col-lg-6 col-xl-4"
-          *ngFor="let item of [1, 1, 1, 1, 1, 1]"
+          *ngFor="let category of categories; let i = index"
         >
           <div class="category">
             <div class="form-check form-switch">
               <input
+                #checkCategory
                 class="form-check-input"
                 type="checkbox"
-                id="flexSwitchCheckDefault"
+                id="categoryId{{ i }}"
+                [checked]="checkedCategories[i]"
+                (change)="selectCategory(i, $event)"
+                [disabled]="charging"
               />
             </div>
-            <app-card [category]="category"></app-card>
+            <app-card [categoryView]="category"></app-card>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+<section class="submenu" *ngIf="!charging && showSave">
+  <app-submenu (clickSave)="saveListElderlyCategories()"></app-submenu>
+</section>
+<app-messages #message></app-messages>

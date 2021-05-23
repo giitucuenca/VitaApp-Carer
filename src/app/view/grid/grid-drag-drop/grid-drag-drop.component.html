@@ -1,13 +1,30 @@
-<div #contenedor class="content__cards" cdkDropListGroup>
-  <ng-container *ngFor="let item of items; let i = index">
+<div class="content__cards" cdkDropListGroup *ngIf="pictogramsHelper.length">
+  <ng-container *ngFor="let pictogram of pictogramsHelper; let i = index">
     <div
       class="content-pictogram-grid__card"
       cdkDropList
       cdkDropListOrientation="horizontal"
-      [cdkDropListData]="{ item: item, index: i }"
+      [cdkDropListData]="{ item: pictogram, index: i }"
       (cdkDropListDropped)="drop($event)"
     >
-      <div cdkDrag>
+      <div class="inner move" cdkDrag>
+        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+        <app-card [pictogramView]="pictogram"></app-card>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<div class="content__cards" cdkDropListGroup *ngIf="pictogramsCarer.length">
+  <ng-container *ngFor="let pictogram of pictogramsCarer; let i = index">
+    <div
+      class="content-pictogram-grid__card"
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      [cdkDropListData]="{ item: pictogram, index: i }"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="inner move" cdkDrag>
         <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
         <app-card [pictogramView]="pictogram"></app-card>
       </div>

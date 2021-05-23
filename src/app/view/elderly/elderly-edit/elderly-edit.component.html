@@ -1,0 +1,147 @@
+<h3>Agregar a un adulto mayor</h3>
+<form
+  class="row g-3 needs-validation"
+  novalidate
+  [formGroup]="formElderly"
+  (ngSubmit)="saveElderly()"
+>
+  <div class="col-12">
+    <label for="elderlyFormAddName" class="form-label">Nombre del Adulto</label>
+    <div class="input__border">
+      <input
+        type="text"
+        class="form-control"
+        id="elderlyFormAddName"
+        placeholder="Ingrese el nombre."
+        formControlName="name"
+        [class.is-invalid]="invalidName"
+      />
+    </div>
+
+    <div *ngIf="invalidName" class="form__feedback text-danger mt-1">
+      <small>Esta información es requerida.</small>
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="elderlyFormAddSurname" class="form-label"
+      >Apellidos del Adulto</label
+    >
+
+    <div class="input__border">
+      <input
+        type="text"
+        class="form-control"
+        id="elderlyFormAddSurname"
+        placeholder="Ingrese los apellidos."
+        formControlName="surname"
+        [class.is-invalid]="invalidSurname"
+      />
+    </div>
+    <div *ngIf="invalidSurname" class="form__feedback text-danger mt-1">
+      <small>Esta información es requerida.</small>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6">
+    <label for="elderlyFormAddLevelScholarity" class="form-label"
+      >Escolaridad</label
+    >
+    <select
+      class="form-select"
+      id="elderlyFormAddLevelScholarity"
+      formControlName="scholarityId"
+      [class.is-invalid]="invalidScholarity"
+    >
+      <option selected disabled value="">Elija</option>
+      <option *ngFor="let level of levels" [value]="level.id">
+        {{ level.name }}
+      </option>
+    </select>
+    <div *ngIf="invalidScholarity" class="form__feedback text-danger mt-1">
+      <small>Esta información es requerida.</small>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6">
+    <label for="validationCustom04" class="form-label">Lateralidad</label>
+    <div class="form-check">
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          id="elderlyFormAddLaterality1"
+          value="d"
+          formControlName="laterality"
+        />
+        <label class="form-check-label" for="elderlyFormAddLaterality1"
+          >Diestro (Derecha)</label
+        >
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          id="elderlyFormAddLaterality2"
+          value="z"
+          formControlName="laterality"
+        />
+        <label class="form-check-label" for="elderlyFormAddLaterality2"
+          >Zurdo (Izquieda)</label
+        >
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6">
+    <label for="validationCustom04" class="form-label">Genero</label>
+    <div class="form-check">
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          id="elderlyFormAddGender1"
+          value="m"
+          formControlName="gender"
+        />
+        <label class="form-check-label" for="elderlyFormAddGender1"
+          >Hombre</label
+        >
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          id="elderlyFormAddGender2"
+          value="f"
+          formControlName="gender"
+        />
+        <label class="form-check-label" for="elderlyFormAddGender2"
+          >Mujer</label
+        >
+      </div>
+    </div>
+  </div>
+  <!-- <div class="col-6">
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="true"
+        id="invalidCheck"
+      />
+      <label class="form-check-label" for="invalidCheck">
+        Cuenta con alguna discapacidad.
+      </label>
+    </div>
+  </div> -->
+  <div class="my-3 form__btn">
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button
+      type="button"
+      class="btn btn-danger text-white"
+      (click)="collapsePanel()"
+    >
+      Cancelar
+    </button>
+  </div>
+</form>
+
+<p-toast key="toastElderlyAdd" position="top-right"></p-toast>

@@ -1,0 +1,47 @@
+<form [formGroup]="formHelper" (ngSubmit)="saveHelper()">
+  <div class="mb-3">
+    <label class="form-label" for="formResgisterName">Nombre</label>
+    <div class="input__border">
+      <input
+        type="text"
+        class="form-control"
+        id="formResgisterName"
+        aria-describedby="helpId"
+        placeholder="Ingrese un nombre descriptivo del la ayuda."
+        formControlName="name"
+        [class.is-invalid]="invalidName"
+      />
+    </div>
+
+    <small id="helpId" class="form-text text-danger" *ngIf="invalidName"
+      >Ingrese un nombre descriptivo del la ayuda.</small
+    >
+  </div>
+  <div class="mb-3">
+    <label for="" class="form-label">Color del Contenedor</label>
+    <div class="color__container">
+      <div class="color__item" *ngFor="let color of colors; let i = index">
+        <input
+          type="radio"
+          class="form-check-input"
+          id="formColCat{{ i }}"
+          [value]="color.color"
+          formControlName="color"
+        />
+        <label
+          for="formColCat{{ i }}"
+          [ngStyle]="{ 'background-color': '#' + color.color }"
+        ></label>
+      </div>
+    </div>
+    <small id="helpId" class="form-text text-danger" *ngIf="invalidColor"
+      >Seleccione un color</small
+    >
+  </div>
+  <div class="my-3 form__btn">
+    <button type="submit" class="btn btn-primary">
+      <i class="pi pi-plus"></i> Agregar
+    </button>
+  </div>
+</form>
+<app-messages #message></app-messages>

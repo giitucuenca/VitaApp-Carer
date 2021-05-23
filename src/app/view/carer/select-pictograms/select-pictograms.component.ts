@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CategoryGet } from 'src/app/controller/interfaces/category_get.interface';
-import { PictogramGet } from 'src/app/controller/interfaces/pictogram_get.interface';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Pictogram,
+  PictogramCarer,
+} from 'src/app/controller/interfaces/pictogram.interface';
+import { SubcategoryCarer } from 'src/app/controller/interfaces/subcategory.interface';
+import { VitaappService } from 'src/app/services/vitaapp/vitaapp.service';
 
 @Component({
   selector: 'app-select-pictograms',
@@ -9,20 +13,61 @@ import { PictogramGet } from 'src/app/controller/interfaces/pictogram_get.interf
   styleUrls: ['./select-pictograms.component.scss'],
 })
 export class SelectPictogramsComponent implements OnInit {
-  pictogram: PictogramGet = {
-    pictogramId: 1,
-    name: 'Hola',
-    color: '17a2b8',
-    subcategoryId: 1,
-    imageUrl:
-      'https://firebasestorage.googleapis.com/v0/b/vitaapp-ucuenca.appspot.com/o/pictograms%2Fimages%2Fbr%C3%B3coli.png?alt=media&token=07f1659f-ae88-4524-b09d-d479342a9ae9',
-  };
+  subcategoryId: number;
+  pictogramsCarer: PictogramCarer[] = [];
+  pictograms: Pictogram[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private vitaapp: VitaappService,
+    private activeRoute: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activeRoute.params.subscribe((data) => {
+      this.subcategoryId = data.id;
+
+      this.vitaapp
+        .getSubcategoryCarerById(this.subcategoryId)
+        .subscribe((subcategory: SubcategoryCarer) => {
+          this.vitaapp
+            .getAllPictogramsBySubcategoryId(subcategory.subcategoryId)
+            .subscribe((data) => {
+              this.pictograms = data;
+            });
+        });
+    });
+  }
 
   showOption(): void {
-    this.router.navigate(['panel/editar-pictogramas', 1]);
+    this.router.navigate(['panel/editar-pictogramas', this.subcategoryId]);
+  }
+
+  addPictogramCarer(pictogram: Pictogram): void {
+    const pictogramCarer: PictogramCarer = {
+      name: pictogram.name,
+      imageUrl: pictogram.imageUrl,
+      subcategoryId: this.subcategoryId,
+      color: pictogram.color,
+      pictogramId: pictogram.pictogramId,
+    };
+
+    this.pictogramsCarer.push(pictogramCarer);
+  }
+
+  deletePictogramCarer(index: number): void {
+    this.pictogramsCarer.splice(index, 1);
+  }
+
+  saveListPictograms(): void {
+    console.log(this.pictogramsCarer);
+
+    if (this.pictogramsCarer.length) {
+      this.vitaapp
+        .saveListPictograms(this.pictogramsCarer)
+        .subscribe((resp) => {
+          this.showOption();
+        });
+    }
   }
 }

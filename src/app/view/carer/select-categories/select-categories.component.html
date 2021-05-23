@@ -11,9 +11,16 @@
           <div class="h4"><small>Categorias Seleccionadas</small></div>
           <hr />
           <div class="content__cards">
-            <div class="content__card" *ngFor="let item of [1, 1, 1]">
+            <div
+              class="content__card"
+              *ngFor="let category of categoriesCarer; let i = index"
+            >
               <div>
-                <app-card [categoryView]="category"></app-card>
+                <app-card
+                  [categoryView]="category"
+                  [showClose]="true"
+                  (clickDelete)="deleteCategoryCarer(i)"
+                ></app-card>
               </div>
             </div>
           </div>
@@ -24,9 +31,12 @@
           <div class="h4"><small>Categorias</small></div>
           <hr />
           <div class="content__cards">
-            <div class="content__card" *ngFor="let item of [1, 1, 1]">
+            <div class="content__card" *ngFor="let category of categories">
               <div>
-                <app-card [categoryView]="category"></app-card>
+                <app-card
+                  [categoryView]="category"
+                  (clickContent)="addCategoryCarer(category)"
+                ></app-card>
               </div>
             </div>
           </div>
@@ -36,5 +46,9 @@
   </div>
 </section>
 <section class="submenu">
-  <app-submenu [showEdit]="true" (clickEdit)="showOption()"></app-submenu>
+  <app-submenu
+    [showEdit]="true"
+    (clickEdit)="showOption()"
+    (clickSave)="saveListCategories()"
+  ></app-submenu>
 </section>

@@ -1,8 +1,23 @@
-import { FileUploadResponse } from 'src/app/controller/interfaces/image.interface';
+import { ImageSubcategory } from './image.interface';
+
 export interface Subcategory {
+  subcategoryId?: number;
   name: string;
   description: string;
-  imageUrl: string;
   categoryId: number;
-  images: FileUploadResponse[];
+  imageUrl: string;
+  color?: string;
+  show?: boolean;
+  images: ImageSubcategory[];
+}
+
+export interface SubcategoryCarer {
+  subcategoryCarerId?: number;
+  name: string;
+  description: string;
+  categoryId: number;
+  subcategoryId: number;
+  imageUrl: string;
+  color?: string;
+  show?: boolean;
 }

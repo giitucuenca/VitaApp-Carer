@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CategoryGet } from 'src/app/controller/interfaces/category_get.interface';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Carer } from 'src/app/controller/interfaces/carer.interface';
+import { CategoryCarer } from 'src/app/controller/interfaces/category.interface';
+import {
+  Subcategory,
+  SubcategoryCarer,
+} from 'src/app/controller/interfaces/subcategory.interface';
+import { VitaappService } from 'src/app/services/vitaapp/vitaapp.service';
 
 @Component({
   selector: 'app-select-subcategories',
@@ -8,21 +14,61 @@ import { CategoryGet } from 'src/app/controller/interfaces/category_get.interfac
   styleUrls: ['./select-subcategories.component.scss'],
 })
 export class SelectSubcategoriesComponent implements OnInit {
-  category: CategoryGet = {
-    categoryId: 1,
-    name: 'Hola',
-    description: 'Hola Mundo',
-    colorId: 1,
-    color: '17a2b8',
-    imageUrl:
-      'https://firebasestorage.googleapis.com/v0/b/vitaapp-ucuenca.appspot.com/o/pictograms%2Fimages%2Fbr%C3%B3coli.png?alt=media&token=07f1659f-ae88-4524-b09d-d479342a9ae9',
-  };
+  categoryId: number;
+  carer: Carer;
+  subcategoriesCarer: SubcategoryCarer[] = [];
+  subcategories: Subcategory[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private vitaapp: VitaappService,
+    private activeRoute: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activeRoute.params.subscribe((data) => {
+      this.categoryId = data.id;
+      this.vitaapp
+        .getCategoryCarerById(this.categoryId)
+        .subscribe((category: CategoryCarer) => {
+          this.vitaapp
+            .getAllSubcategoriesByCategoryId(category.categoryId)
+            .subscribe((data) => {
+              this.subcategories = data;
+            });
+        });
+    });
+  }
 
   showOption(): void {
-    this.router.navigate(['panel/editar-subcategorias', 1]);
+    this.router.navigate(['panel/editar-subcategorias', this.categoryId]);
+  }
+
+  addSubcategoryCarer(subcategory: Subcategory): void {
+    const subcategoryCarer: SubcategoryCarer = {
+      name: subcategory.name,
+      description: subcategory.description,
+      imageUrl: subcategory.imageUrl,
+      subcategoryId: subcategory.subcategoryId,
+      categoryId: this.categoryId,
+      color: subcategory.color,
+    };
+
+    this.subcategoriesCarer.push(subcategoryCarer);
+    console.log(this.subcategoriesCarer);
+  }
+
+  deleteSubcategoryCarer(index: number): void {
+    this.subcategoriesCarer.splice(index, 1);
+  }
+
+  saveListSubcategories(): void {
+    if (this.subcategoriesCarer.length) {
+      this.vitaapp
+        .saveListSubcategories(this.subcategoriesCarer)
+        .subscribe((resp) => {
+          this.showOption();
+        });
+    }
   }
 }

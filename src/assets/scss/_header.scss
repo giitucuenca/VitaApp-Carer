@@ -1,35 +1,37 @@
 @import "./variables";
 
 header.header__login {
-  display: flex;
   position: relative;
-  min-height: 4rem;
+  display: flex;
+  min-height: 5rem;
   margin-bottom: 3rem;
   background: $bg-linear;
-  @include respond-md {
+  @include respond-lg {
     min-height: 6rem;
   }
   .header__logos {
     @include gap;
     position: absolute;
-    top: calc(50% + 0.25rem);
+    top: 1rem;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
     @include respond-lg {
       left: 1rem;
+      top: 1.5rem;
+      transform: none;
     }
 
     .logo__hidden {
       display: none;
     }
-    @include respond-md {
+    @include respond-lg {
       .logo__hidden {
         display: initial;
       }
     }
     .header__logo {
-      height: 2rem;
-      @include respond-md {
+      height: 3rem;
+      @include respond-lg {
         height: 3rem;
       }
       @include gap-separation;

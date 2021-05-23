@@ -1,7 +1,11 @@
+import { VitaappService } from 'src/app/services/vitaapp/vitaapp.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { PictogramGet } from 'src/app/controller/interfaces/pictogram_get.interface';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CollapsePanelComponent } from '../../components/collapse-panel/collapse-panel.component';
+import { PictogramCarer } from 'src/app/controller/interfaces/pictogram.interface';
+import { EditPictogramComponent } from '../../forms/pictogram/edit-pictogram/edit-pictogram.component';
+import { ConfirmationService, Message, MessageService } from 'primeng/api';
+import { SubcategoryCarer } from 'src/app/controller/interfaces/subcategory.interface';
 
 @Component({
   selector: 'app-edit-pictograms',
@@ -9,27 +13,116 @@ import { CollapsePanelComponent } from '../../components/collapse-panel/collapse
   styleUrls: ['./edit-pictograms.component.scss'],
 })
 export class EditPictogramsComponent implements OnInit {
-  @ViewChild('updatePanel') updatePanel: CollapsePanelComponent;
+  @ViewChild('panel') panel: CollapsePanelComponent;
+  @ViewChild('editPictogram') editPictogram: EditPictogramComponent;
+  subcategoryId: number;
+  pictogramsCarer: PictogramCarer[] = [];
   idEdit = -1;
-  pictogram: PictogramGet = {
-    pictogramId: 1,
-    name: 'Hola',
-    color: '17a2b8',
-    subcategoryId: 1,
-    imageUrl:
-      'https://firebasestorage.googleapis.com/v0/b/vitaapp-ucuenca.appspot.com/o/pictograms%2Fimages%2Fbr%C3%B3coli.png?alt=media&token=07f1659f-ae88-4524-b09d-d479342a9ae9',
-  };
-  constructor(private router: Router) {}
+  subMenuNavigation = ['Categorias', 'Subcategoria', 'Pictogramas'];
+  pageCurrent: string;
 
-  ngOnInit(): void {}
+  constructor(
+    private router: Router,
+    private vitaapp: VitaappService,
+    private activeRoute: ActivatedRoute,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
 
-  updatePictogram(idEdit: number): void {
+  ngOnInit(): void {
+    this.pageCurrent = this.subMenuNavigation[2];
+    this.activeRoute.params.subscribe((params) => {
+      this.subcategoryId = params.id;
+      this.getPictogramsCarer();
+    });
+  }
+
+  getPictogramsCarer(): void {
+    this.vitaapp
+      .getAllPictogramsCarerBySubcategoryId(this.subcategoryId)
+      .subscribe((data) => {
+        this.pictogramsCarer = data;
+      });
+  }
+
+  updatePictogram(pictogram: PictogramCarer): void {
     /*if (this.idEdit === idEdit || this.updatePanel.isCollapsed) {
       this.updatePanel.collapse();
     }
     this.idEdit = idEdit;*/
-    console.log(idEdit);
+    this.editPictogram.pictogramToEdit(pictogram);
 
-    this.updatePanel.openPanel();
+    this.panel.openPanel();
+  }
+
+  selectPictograms(): void {
+    this.router.navigate([
+      '/panel/seleccionar-pictogramas',
+      this.subcategoryId,
+    ]);
+  }
+
+  collapsePanel(): void {
+    this.panel.closePanel();
+  }
+
+  deletePictogram(pictogramId: number): void {
+    this.confirmationService.confirm({
+      message: 'Esta seguro que desea eliminar el pictograma.',
+      header: 'Quiere eliminar el pictograma.',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.vitaapp.deletePictogram(pictogramId).subscribe(
+          (resp) => {
+            const msg = {
+              severity: 'success',
+              summary: 'Realizado',
+              detail: 'Se elimino el pictograma.',
+            };
+            this.showMessage(msg);
+            this.getPictogramsCarer();
+          },
+          (err) => {
+            const msg = {
+              severity: 'error',
+              summary: 'Error',
+              detail: err.message,
+            };
+            this.showMessage(msg);
+          }
+        );
+      },
+      reject: () => {
+        const msg = {
+          severity: 'info',
+          summary: 'Cancelado',
+          detail: 'Se canceló el eliminado.',
+        };
+        this.showMessage(msg);
+      },
+      key: 'positionDialog',
+    });
+  }
+
+  showMessage(msg: Message) {
+    this.messageService.add({
+      key: 'toastPictogram',
+      ...msg,
+    });
+  }
+
+  goToPage(index: number): void {
+    if (index == 0) {
+      this.router.navigateByUrl('/panel/editar-categorias');
+    } else if (index == 1) {
+      this.vitaapp
+        .getSubcategoryCarerById(this.subcategoryId)
+        .subscribe((subcategory: SubcategoryCarer) => {
+          this.router.navigate([
+            '/panel/editar-subcategorias/',
+            subcategory.categoryId,
+          ]);
+        });
+    }
   }
 }

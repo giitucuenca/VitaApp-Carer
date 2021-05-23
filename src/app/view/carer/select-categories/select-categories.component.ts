@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoryGet } from 'src/app/controller/interfaces/category_get.interface';
+import { Carer } from 'src/app/controller/interfaces/carer.interface';
+import {
+  Category,
+  CategoryCarer,
+} from 'src/app/controller/interfaces/category.interface';
+import { VitaappService } from 'src/app/services/vitaapp/vitaapp.service';
 
 @Component({
   selector: 'app-select-categories',
@@ -8,21 +13,54 @@ import { CategoryGet } from 'src/app/controller/interfaces/category_get.interfac
   styleUrls: ['./select-categories.component.scss'],
 })
 export class SelectCategoriesComponent implements OnInit {
-  category: CategoryGet = {
-    categoryId: 1,
-    name: 'Hola',
-    description: 'Hola Mundo',
-    colorId: 1,
-    color: '17a2b8',
-    imageUrl:
-      'https://firebasestorage.googleapis.com/v0/b/vitaapp-ucuenca.appspot.com/o/pictograms%2Fimages%2Fbr%C3%B3coli.png?alt=media&token=07f1659f-ae88-4524-b09d-d479342a9ae9',
-  };
+  carer: Carer;
+  categories: Category[] = [];
+  categoriesCarer: CategoryCarer[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private vitaapp: VitaappService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.vitaapp.meInformation().subscribe((data) => {
+      this.carer = data;
+      this.getAllCategories();
+    });
+  }
 
   showOption(): void {
     this.router.navigate(['panel/editar-categorias']);
+  }
+
+  getAllCategories(): void {
+    this.vitaapp.getAllCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
+
+  addCategoryCarer(category: Category): void {
+    const categoryCarer: CategoryCarer = {
+      name: category.name,
+      description: category.description,
+      color: category.color,
+      imageUrl: category.imageUrl,
+      carerId: this.carer.carerId,
+      categoryId: category.categoryId,
+    };
+
+    this.categoriesCarer.push(categoryCarer);
+    console.log(this.categoriesCarer);
+  }
+
+  deleteCategoryCarer(index: number): void {
+    this.categoriesCarer.splice(index, 1);
+  }
+
+  saveListCategories(): void {
+    if (this.categoriesCarer.length) {
+      this.vitaapp
+        .saveListCategories(this.categoriesCarer)
+        .subscribe((resp) => {
+          this.showOption();
+        });
+    }
   }
 }

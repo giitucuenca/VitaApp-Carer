@@ -43,6 +43,9 @@ $vitaapp-web-carer-ucuenca-theme: mat-light-theme(
 @import "assets/scss/footer";
 @import "assets/scss/input";
 @import "assets/scss/scrollbar";
+@import "assets/scss/form";
+@import "assets/scss/color-radio";
+@import "assets/scss/breadcrumb";
 
 $gap: 0.5rem;
 
@@ -78,6 +81,20 @@ $custom-typography: mat-typography-config(
 );
 
 @include angular-material-typography($custom-typography);
+
+.title {
+  position: relative;
+  padding-left: 0.75rem;
+  &::before {
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    content: " ";
+    height: 100%;
+    width: 0.25rem;
+    background: $primary;
+  }
+}
 
 .btn-secondary {
   color: #fff;
@@ -238,6 +255,7 @@ input[type="radio"] {
 
   .content-pictogram__card {
     @include gap-separation;
+
     width: calc(33.33333% - #{$gap});
     @include respond-xs {
       width: calc(25% - #{$gap});
@@ -295,4 +313,18 @@ input[type="radio"] {
   position: fixed;
   right: 0rem;
   bottom: calc(5rem + 60px);
+  z-index: 5000;
+}
+
+.card {
+  background-color: transparent !important;
+  border-radius: 1rem !important;
+  border: 1px solid black;
+  overflow: hidden !important;
+}
+
+.move {
+  .card {
+    cursor: move !important;
+  }
 }

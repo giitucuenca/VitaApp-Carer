@@ -1,0 +1,7 @@
+@import "../../../../assets/scss/mixins/respond-to";
+.footer__space {
+  background-color: transparent !important;
+  @include respond-md {
+    height: 2rem;
+  }
+}

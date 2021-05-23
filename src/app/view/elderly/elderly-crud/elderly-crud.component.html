@@ -22,12 +22,16 @@
       [toggleable]="true"
       [collapsed]="true"
     >
-      <app-elderly-add></app-elderly-add>
+      <app-elderly-add (reload)="getElderlies()"></app-elderly-add>
     </p-fieldset>
   </section>
   <section class="form__add">
-    <app-collapse-panel #updatePanel>
-      <app-elderly-add></app-elderly-add>
+    <app-collapse-panel #panel>
+      <app-elderly-edit
+        #editElderlyForm
+        (reload)="getElderlies()"
+        (collapse)="collapsePanel()"
+      ></app-elderly-edit>
     </app-collapse-panel>
   </section>
   <section class="elderly__list container mt-4">
@@ -42,14 +46,20 @@
         <tr *ngFor="let elderly of elderlies">
           <th scope="col">
             <h4>
-              <small>{{ elderly.name }}</small>
+              <small>{{ elderly.name }} {{ elderly.surname }}</small>
             </h4>
             <p>{{ elderly.username }}</p>
           </th>
           <th scope="col">
-            <button class="btn btn-warning text-white me-2">
-              <i class="fas fa-edit" (click)="updateElderly()"></i></button
-            ><button class="btn btn-danger text-white">
+            <button
+              (click)="editElderly(elderly)"
+              class="btn btn-warning text-white me-2"
+            >
+              <i class="fas fa-edit"></i></button
+            ><button
+              (click)="deleteElderly(elderly.elderlyId)"
+              class="btn btn-danger text-white"
+            >
               <i class="fas fa-trash"></i>
             </button>
           </th>
@@ -58,3 +68,22 @@
     </table>
   </section>
 </section>
+
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  key="positionDialog"
+  [position]="'top'"
+  [baseZIndex]="10000"
+  #cd
+>
+  <p-footer>
+    <button type="button" class="btn btn-primary" (click)="cd.reject()">
+      <i class="pi pi-times"></i> Cancelar
+    </button>
+    <button type="button" class="btn btn-primary" (click)="cd.accept()">
+      <i class="pi pi-check"></i> Aceptar
+    </button>
+  </p-footer>
+</p-confirmDialog>
+
+<p-toast key="toastElderlyCrud" position="top-right"></p-toast>

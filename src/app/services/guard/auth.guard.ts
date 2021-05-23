@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.vitaappService.validToken().pipe(
+    return this.vitaappService.meInformation().pipe(
       map((resp) => {
         if (resp) {
           return true;

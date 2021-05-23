@@ -17,12 +17,17 @@ import { SelectSubcategoriesComponent } from './carer/select-subcategories/selec
 import { SelectPictogramsComponent } from './carer/select-pictograms/select-pictograms.component';
 import { EditGridComponent } from './grid/edit-grid/edit-grid.component';
 import { AuthGuard } from '../services/guard/auth.guard';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
+  },
+  {
+    path: 'error',
+    component: PageNotFoundComponent,
   },
   {
     path: 'login',
@@ -97,7 +102,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'login',
+    redirectTo: 'error',
     pathMatch: 'full',
   },
 ];

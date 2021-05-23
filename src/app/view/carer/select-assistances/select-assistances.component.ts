@@ -1,8 +1,11 @@
-import { EditPictogramsAssistanceComponent } from './../edit-pictograms-assistance/edit-pictograms-assistance.component';
-import { CategoryGet } from './../../../controller/interfaces/category_get.interface';
 import { Component, OnInit } from '@angular/core';
-import { PictogramGet } from 'src/app/controller/interfaces/pictogram_get.interface';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Pictogram,
+  PictogramHelper,
+  PictogramHelperCarer,
+} from 'src/app/controller/interfaces/pictogram.interface';
+import { VitaappService } from 'src/app/services/vitaapp/vitaapp.service';
 
 @Component({
   selector: 'app-select-assistances',
@@ -10,19 +13,62 @@ import { Router } from '@angular/router';
   styleUrls: ['./select-assistances.component.scss'],
 })
 export class SelectAssistancesComponent implements OnInit {
-  pictogram: PictogramGet = {
-    pictogramId: 1,
-    name: 'Hola',
-    color: '17a2b8',
-    subcategoryId: 1,
-    imageUrl:
-      'https://firebasestorage.googleapis.com/v0/b/vitaapp-ucuenca.appspot.com/o/pictograms%2Fimages%2Fbr%C3%B3coli.png?alt=media&token=07f1659f-ae88-4524-b09d-d479342a9ae9',
-  };
-  constructor(private router: Router) {}
+  helperId: number;
+  pictogramsHelper: PictogramHelper[] = [];
+  pictogramsHelperCarer: PictogramHelperCarer[] = [];
 
-  ngOnInit(): void {}
+  constructor(
+    private router: Router,
+    private vitaapp: VitaappService,
+    private activeRoute: ActivatedRoute
+  ) {}
 
-  editPictogramsAssistance(): void {
-    this.router.navigate(['ayuda/editar-ayuda', 1]);
+  ngOnInit(): void {
+    this.activeRoute.params.subscribe((params) => {
+      this.helperId = params.id;
+      this.vitaapp.getAllPictogramsByHelperId(this.helperId).subscribe(
+        (pictograms) => {
+          this.vitaapp.getAllPictogramsHelper().subscribe((data) => {
+            this.pictogramsHelper = data;
+            this.pictogramsHelper.forEach((pictogram) => {
+              pictogram.color = 'fff';
+            });
+          });
+        },
+        (err) => {
+          this.router.navigateByUrl('/error');
+        }
+      );
+    });
+  }
+
+  showOption(): void {
+    this.router.navigate(['ayuda/editar-ayuda', this.helperId]);
+  }
+
+  addPictogramCarer(pictogram: PictogramHelper): void {
+    const pictogramCarer: PictogramHelperCarer = {
+      name: pictogram.name,
+      imageUrl: pictogram.imageUrl,
+      helperId: this.helperId,
+      pictogramId: pictogram.pictogramId,
+    };
+    this.pictogramsHelperCarer.push(pictogramCarer);
+  }
+
+  deletePictogramCarer(index: number): void {
+    this.pictogramsHelperCarer.splice(index, 1);
+  }
+
+  saveListPictograms(): void {
+    console.log(this.pictogramsHelperCarer);
+
+    if (this.pictogramsHelperCarer.length) {
+      this.vitaapp
+        .saveListPictogramsHelper(this.pictogramsHelperCarer)
+        .subscribe((resp) => {
+          this.showOption();
+        });
+    }
   }
 }

@@ -1,3 +1,6 @@
+<section class="submenu">
+  <app-submenu (clickSave)="saveDataGrid()"></app-submenu>
+</section>
 <section>
   <nav class="nav__top">
     <ul>
@@ -6,7 +9,7 @@
           type="button"
           class="btn"
           role="button"
-          [routerLink]="['/panel/editar-pictogramas', 1]"
+          [routerLink]="['/panel/editar-subcategorias', categoryId]"
         >
           <i class="flaticon flaticon-plus"></i> Pictogramas
         </button>
@@ -29,11 +32,20 @@
     <div class="row flex-column-reverse flex-md-row">
       <div class="col-12 col-md-6">
         <label for="" class="m-2">Seleccionar Ayuda</label>
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          [(ngModel)]="helperId"
+          (change)="getAllPictogramsByHelperId($event.target.value)"
+        >
+          <option selected disabled value="0">Ayudas</option>
+          <option
+            name="helperId"
+            [value]="helper.helperId"
+            *ngFor="let helper of helpers"
+          >
+            {{ helper.name }}
+          </option>
         </select>
       </div>
 
@@ -47,12 +59,54 @@
       </div>
     </div>
   </section>
-  <section class="grid__content">
-    <div class="ayudas">
-      <app-grid-drag-drop></app-grid-drag-drop>
+  <section #gridContent class="grid__content">
+    <div class="subcategories d-md-none">
+      <div class="content__cards">
+        <div
+          class="content-pictogram-grid__card"
+          *ngFor="let subcategory of subcategories; let i = index"
+        >
+          <div>
+            <app-card [pictogramView]="subcategory"></app-card>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="pictogramas">
-      <app-grid-drag-drop></app-grid-drag-drop>
+    <hr class="d-md-none" />
+    <div class="ayudas" style="background-color: #e6e6e6">
+      <app-grid-drag-drop
+        #gridPictogramsHelper
+        [pictogramsHelper]="pictogramsHelper"
+      ></app-grid-drag-drop>
+    </div>
+    <hr class="d-md-none" />
+    <div class="pictogramas" style="background-color: #c4c4c4">
+      <app-grid-drag-drop
+        #gridPictogramsCarer
+        [pictogramsCarer]="pictogramsCarer"
+      ></app-grid-drag-drop>
+    </div>
+    <div
+      class="subcategories d-none d-md-block"
+      style="background-color: #9e9e9e"
+    >
+      <div class="content__cards">
+        <div
+          class="content-pictogram-grid__card"
+          *ngFor="let subcategory of subcategories; let i = index"
+        >
+          <div>
+            <app-card
+              [pictogramView]="subcategory"
+              (click)="
+                getPictogramsBySubcategoryId(subcategory.subcategoryCarerId)
+              "
+            ></app-card>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </div>
+
+<app-messages #message></app-messages>

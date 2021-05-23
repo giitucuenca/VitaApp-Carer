@@ -6,6 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -30,7 +31,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       }
     }
   }
-  constructor() {}
+  constructor(private AuthService: AuthService) {}
 
   ngOnInit(): void {}
 
@@ -63,5 +64,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       this.collapsePanel.nativeElement.style.width = '0';
       this.isCollapsed = true;
     }
+  }
+
+  logout(): void {
+    this.AuthService.logOut();
   }
 }

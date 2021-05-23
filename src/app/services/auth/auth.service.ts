@@ -15,7 +15,12 @@ export class AuthService {
 
   public logOut(): void {
     localStorage.clear();
-    this.router.navigateByUrl('/login');
+    this.router
+      .navigateByUrl('/login')
+      .finally()
+      .then(() => {
+        window.location.reload();
+      });
   }
 
   public verifyToken(): Observable<any> {

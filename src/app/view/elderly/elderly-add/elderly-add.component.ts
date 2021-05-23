@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Message, MessageService } from 'primeng/api';
 import { Carer } from 'src/app/controller/interfaces/carer.interface';
@@ -11,6 +11,8 @@ import { VitaappService } from 'src/app/services/vitaapp/vitaapp.service';
   styleUrls: ['./elderly-add.component.scss'],
 })
 export class ElderlyAddComponent implements OnInit {
+  @Output() reload = new EventEmitter<boolean>();
+  @Output() collapse = new EventEmitter<boolean>();
   formElderly: FormGroup;
   carer: Carer;
 
@@ -72,6 +74,8 @@ export class ElderlyAddComponent implements OnInit {
               detail: resp.message,
             };
             this.showMessage(msg);
+            this.reload.emit(true);
+            this.initializeForm();
           },
           (error) => {
             error.error.errors.forEach((err: any) => {

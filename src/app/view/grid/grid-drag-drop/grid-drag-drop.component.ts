@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { PictogramGet } from 'src/app/controller/interfaces/pictogram_get.interface';
+import {
+  PictogramCarer,
+  PictogramHelperCarer,
+} from 'src/app/controller/interfaces/pictogram.interface';
 
 @Component({
   selector: 'app-grid-drag-drop',
@@ -9,26 +12,47 @@ import { PictogramGet } from 'src/app/controller/interfaces/pictogram_get.interf
 })
 export class GridDragDropComponent implements OnInit {
   items = [];
-  pictogram: PictogramGet = {
-    pictogramId: 1,
-    name: 'Hola',
-    color: '17a2b8',
-    subcategoryId: 1,
-    position: 1,
-    imageUrl:
-      'https://firebasestorage.googleapis.com/v0/b/vitaapp-ucuenca.appspot.com/o/pictograms%2Fimages%2Fbr%C3%B3coli.png?alt=media&token=07f1659f-ae88-4524-b09d-d479342a9ae9',
-  };
-  drop(event: CdkDragDrop<any>) {
-    this.items[event.previousContainer.data.index] = event.container.data.item;
-    this.items[event.container.data.index] = event.previousContainer.data.item;
-    console.log(this.items);
-  }
 
-  ngOnInit(): void {
-    for (let i = 0; i < 10; i++) {
-      const pictogram = { ...this.pictogram };
-      pictogram.position = i;
-      this.items.push(pictogram);
+  change = false;
+  @Input() pictogramsCarer: PictogramCarer[] = [];
+  @Input() pictogramsHelper: PictogramHelperCarer[] = [];
+  drop(event: CdkDragDrop<any>) {
+    this.change = true;
+    if (this.pictogramsCarer.length) {
+      this.pictogramsCarer[event.previousContainer.data.index] =
+        event.container.data.item;
+      this.pictogramsCarer[event.container.data.index] =
+        event.previousContainer.data.item;
+      console.log(this.pictogramsCarer);
+    } else if (this.pictogramsHelper.length) {
+      this.pictogramsHelper[event.previousContainer.data.index] =
+        event.container.data.item;
+      this.pictogramsHelper[event.container.data.index] =
+        event.previousContainer.data.item;
     }
   }
+
+  get getPictogramsCarer(): PictogramCarer[] {
+    return this.pictogramsCarer.map((pictogram, index) => {
+      pictogram.position = index;
+      return pictogram;
+    });
+  }
+
+  get getPictogramsHelper(): PictogramHelperCarer[] {
+    return this.pictogramsHelper.map((pictogram, index) => {
+      pictogram.position = index;
+      return pictogram;
+    });
+  }
+
+  set setChange(change: boolean) {
+    this.change = change;
+  }
+
+  get getChange(): boolean {
+    return this.change;
+  }
+
+  ngOnInit(): void {}
 }

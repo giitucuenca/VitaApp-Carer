@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -125,6 +126,8 @@ import { environment } from '../environments/environment';
       useClass: AuthInterceptor,
       multi: true,
     },
+
+    AuthService,
   ],
   bootstrap: [AppComponent],
 })

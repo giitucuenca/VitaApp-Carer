@@ -45,17 +45,38 @@ export class LoginComponent implements OnInit {
         password: this.formLogin.get('password').value,
       };
 
-      this.vitaapp.loginCarer(auth).subscribe(
+      // this.vitaapp.loginCarer(auth).subscribe(
+      //   (resp) => {
+      //     this.authService.setSession(resp.jwt);
+      //     // * Redirecciono al main en caso de que la informacion de registro sea correcta
+      //     this.router.navigateByUrl('/adulto-mayor');
+      //   },
+      //   (err) => {
+      //     const msg = {
+      //       severity: 'error',
+      //       summary: 'Error',
+      //       detail: err.message,
+      //     };
+      //     this.showMessage(msg);
+      //   }
+      // );
+      this.authService.SignIn(auth).then(
         (resp) => {
-          this.authService.setSession(resp.jwt);
-          // * Redirecciono al main en caso de que la informacion de registro sea correcta
-          this.router.navigateByUrl('/adulto-mayor');
+          console.log(resp);
+          if (!resp) {
+            const msg = {
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Correo o Contraseña Incorrecta',
+            };
+            this.showMessage(msg);
+          }
         },
-        (err) => {
+        (error) => {
           const msg = {
             severity: 'error',
             summary: 'Error',
-            detail: err.message,
+            detail: 'Correo o Contraseña Incorrecta',
           };
           this.showMessage(msg);
         }
@@ -80,31 +101,37 @@ export class LoginComponent implements OnInit {
         password: this.formRegister.get('password').value,
       };
 
-      this.vitaapp.registerCarer(carer).subscribe(
-        (data) => {
-          console.log(data);
+      this.authService.SignUp(carer).then((resp) => {
+        console.log(resp);
+      });
 
-          this.authService.setSession(data.token);
-          // * Redirecciono al main en caso de que la informacion de registro sea correcta
-          this.router.navigateByUrl('/adulto-mayor');
-          const msg = {
-            severity: 'success',
-            summary: 'Enhorabuena',
-            detail: data.message,
-          };
-          this.showMessage(msg);
-        },
-        (error) => {
-          error.error.errors.forEach((err) => {
-            const msg = {
-              severity: 'error',
-              summary: 'Error',
-              detail: err,
-            };
-            this.showMessage(msg);
-          });
-        }
-      );
+      console.log('Entre primero');
+
+      // this.vitaapp.registerCarer(carer).subscribe(
+      //   (data) => {
+      //     console.log(data);
+
+      //     this.authService.setSession(data.token);
+      //     // * Redirecciono al main en caso de que la informacion de registro sea correcta
+      //     this.router.navigateByUrl('/adulto-mayor');
+      //     const msg = {
+      //       severity: 'success',
+      //       summary: 'Enhorabuena',
+      //       detail: data.message,
+      //     };
+      //     this.showMessage(msg);
+      //   },
+      //   (error) => {
+      //     error.error.errors.forEach((err) => {
+      //       const msg = {
+      //         severity: 'error',
+      //         summary: 'Error',
+      //         detail: err,
+      //       };
+      //       this.showMessage(msg);
+      //     });
+      //   }
+      // );
     } else {
       const msg = {
         severity: 'error',

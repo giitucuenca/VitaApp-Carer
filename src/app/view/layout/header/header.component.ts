@@ -1,3 +1,4 @@
+import { FirebaseService } from './../../../services/firebase/firebase.service';
 import {
   AfterViewInit,
   Component,
@@ -31,9 +32,16 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       }
     }
   }
-  constructor(private AuthService: AuthService) {}
+  constructor(
+    private AuthService: AuthService,
+    public firebase: FirebaseService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.firebase.getChatRooms().catch((err) => {
+      console.log(err);
+    });
+  }
 
   ngAfterViewInit(): void {
     this.collapsePanel.nativeElement.style.width =

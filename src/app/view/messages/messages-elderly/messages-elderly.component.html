@@ -1,0 +1,59 @@
+<section class="messages__container d-flex">
+  <div class="users" #usersContainer>
+    <h4 class="title-container">Adultos Mayores</h4>
+    <div
+      [ngClass]="!chat.read ? 'user bg-active' : 'user'"
+      *ngFor="let chat of firebase.chatRooms"
+      (click)="openChat(chat)"
+    >
+      <strong class="mb-2 d-block">{{ chat.chatName }} </strong>
+      <small>mensaje <span *ngIf="!chat.read">no</span> leido</small>
+    </div>
+    <div class="not-content" *ngIf="!firebase.chatRooms.length">
+      <div class="not-content_icon">
+        <i class="pi pi-inbox"></i>
+      </div>
+      <div class="not-content_text">No tienes mensajes</div>
+    </div>
+  </div>
+  <div class="messages" #messagesContainer>
+    <h4
+      class="title-container bg-black text-end mb-0"
+      *ngIf="firebase.messages"
+    >
+      <i class="panel-close fas fa-times" (click)="openMessage()"></i>
+      <span>{{ chatName }}</span>
+    </h4>
+
+    <cdk-virtual-scroll-viewport
+      itemSize="50"
+      class="pictograms"
+      *ngIf="firebase.messages"
+    >
+      <div
+        class="content__cards mb-2"
+        *cdkVirtualFor="let message of firebase.messages"
+      >
+        <div
+          class="content-pictogram_messages"
+          *ngFor="let pictogram of message.message"
+        >
+          <div>
+            <app-card [pictogramView]="pictogram"></app-card>
+          </div>
+        </div>
+        <div class="w-100 my-2 pe-2 text-end">
+          {{ message.timestamp.seconds * 1000 | date: "H:mm a" }} |
+          {{ message.timestamp.seconds * 1000 | date: "MMM d" }}
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+    <div class="container-fluid"></div>
+    <div class="not-content" *ngIf="!firebase.messages">
+      <div class="not-content_icon">
+        <i class="pi pi-inbox"></i>
+      </div>
+      <div class="not-content_text">Tus mensajes aparecerán aquí</div>
+    </div>
+  </div>
+</section>

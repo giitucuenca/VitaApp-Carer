@@ -218,17 +218,26 @@ export class EditGridComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     for (let element of items) {
       const htmlElement: HTMLElement = element as HTMLElement;
-
       if (widthWindow >= 1200) {
         htmlElement.style.width = `calc(${
-          (widthGridContent * 9.090909) / 100
+          (widthGridContent * 7.6923) / 100
         }px - 0.5rem)`;
       } else if (widthWindow >= 768) {
         htmlElement.style.width = `calc(${
           (widthGridContent * 11.111111) / 100
         }px - 0.5rem)`;
+      } else if (widthWindow >= 576) {
+        htmlElement.style.width = `calc(${
+          (widthGridContent * 20) / 100
+        }px - 0.5rem)`;
+      } else if (widthWindow >= 365) {
+        htmlElement.style.width = `calc(${
+          (widthGridContent * 25) / 100
+        }px - 0.5rem)`;
       } else {
-        htmlElement.style.width = '';
+        htmlElement.style.width = `calc(${
+          (widthGridContent * 33.33333) / 100
+        }px - 0.5rem)`;
       }
     }
   }

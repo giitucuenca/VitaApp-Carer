@@ -23,12 +23,15 @@ export class LoginComponent implements OnInit {
   // * Contiene los valores del formulario de log in.
   formLogin: FormGroup;
   formRegister: FormGroup;
+
+  showLds = false;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private vitaapp: VitaappService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -36,10 +39,12 @@ export class LoginComponent implements OnInit {
     this.date = Date.now();
     // * Inicializo el formulario
     this.initializeForm();
+    this.auth.logOut();
   }
 
   logIn(): void {
     if (this.formLogin.valid) {
+      this.showLds = true;
       const auth: Auth = {
         username: this.formLogin.get('email').value,
         password: this.formLogin.get('password').value,
@@ -62,15 +67,8 @@ export class LoginComponent implements OnInit {
       // );
       this.authService.SignIn(auth).then(
         (resp) => {
+          this.showLds = false;
           console.log(resp);
-          if (!resp) {
-            const msg = {
-              severity: 'error',
-              summary: 'Error',
-              detail: 'Correo o Contraseña Incorrecta',
-            };
-            this.showMessage(msg);
-          }
         },
         (error) => {
           const msg = {
@@ -78,7 +76,12 @@ export class LoginComponent implements OnInit {
             summary: 'Error',
             detail: 'Correo o Contraseña Incorrecta',
           };
+          if (error.code && error.code === 'auth/too-many-requests') {
+            msg.detail =
+              'Se bloqueo su cuenta temporalmente dado a varios intentos errones, intente mas tarde.';
+          }
           this.showMessage(msg);
+          this.showLds = false;
         }
       );
     } else {
@@ -94,6 +97,7 @@ export class LoginComponent implements OnInit {
 
   register(): void {
     if (this.formRegister.valid) {
+      this.showLds = true;
       const carer: Carer = {
         name: this.formRegister.get('name').value,
         surname: this.formRegister.get('surname').value,
@@ -101,9 +105,27 @@ export class LoginComponent implements OnInit {
         password: this.formRegister.get('password').value,
       };
 
-      this.authService.SignUp(carer).then((resp) => {
-        console.log(resp);
-      });
+      this.authService
+        .SignUp(carer)
+        .then((resp) => {
+          this.showLds = false;
+        })
+
+        .catch((error) => {
+          const msg = {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Error en el registro.',
+          };
+
+          if (error.code && error.code === 'auth/email-already-in-use') {
+            msg.detail =
+              'Ya existe una cuenta registrada con el coreo: ' + carer.email;
+          }
+
+          this.showMessage(msg);
+          this.showLds = false;
+        });
 
       console.log('Entre primero');
 

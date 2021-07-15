@@ -31,11 +31,11 @@
     }
     @include respond-xl {
       .subcategories {
-        width: 9.090909%;
+        width: 7.6923%;
       }
       .ayudas,
       .pictogramas {
-        width: calc(9.090909% * 5);
+        width: calc(7.6923% * 6);
       }
     }
   }

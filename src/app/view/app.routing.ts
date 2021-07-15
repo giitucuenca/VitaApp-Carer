@@ -18,11 +18,13 @@ import { SelectPictogramsComponent } from './carer/select-pictograms/select-pict
 import { EditGridComponent } from './grid/edit-grid/edit-grid.component';
 import { AuthGuard } from '../services/guard/auth.guard';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { MessagesElderlyComponent } from './messages/messages-elderly/messages-elderly.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: '/adulto-mayor',
     pathMatch: 'full',
   },
   {
@@ -96,6 +98,10 @@ export const routes: Routes = [
             component: SelectAssistancesComponent,
           },
         ],
+      },
+      {
+        path: 'mensajes',
+        component: MessagesElderlyComponent,
       },
     ],
     canActivate: [AuthGuard],

@@ -29,7 +29,7 @@ export class AuthService {
     private firebase: FirebaseService,
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone // NgZone service to remove outside scope warning,
   ) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
@@ -61,11 +61,13 @@ export class AuthService {
         this.router.navigateByUrl('/adulto-mayor');
       });
       this.SetUserData(result.user);
-      this.firebase.firebaseMessage();
+      // this.firebase.firebaseMessage();
+      this.firebase.requestPermissionsMessage(result.user.uid);
       return true;
     } catch (error) {
-      // window.alert(error.message);
-      return false;
+      console.log(error);
+
+      throw error;
     }
   }
 
@@ -110,19 +112,39 @@ export class AuthService {
       this.router.navigateByUrl('/adulto-mayor');
 
       return true;
-    } catch (error_1) {
-      return false;
+    } catch (error) {
+      throw error;
     }
   }
 
-  public logOut(): void {
-    localStorage.clear();
-    this.router
-      .navigateByUrl('/login')
-      .finally()
-      .then(() => {
-        window.location.reload();
+  async logOut() {
+    if (!this.userData || !this.userData.uid) {
+      if (localStorage.getItem('user')) {
+        this.userData = JSON.parse(localStorage.getItem('user'));
+      }
+    }
+
+    if (this.userData && this.userData.uid) {
+      this.firebase.deleteToken(this.userData.uid).then(() => {
+        return this.afAuth.signOut().then(() => {
+          this.deleteLocalStorage();
+        });
       });
+    } else {
+      return this.afAuth.signOut().then(() => {
+        this.deleteLocalStorage();
+      });
+    }
+    try {
+      this.firebase.deleteTokenLogin();
+    } catch (error) {}
+  }
+
+  deleteLocalStorage(): void {
+    localStorage.clear();
+    localStorage.removeItem('user');
+    this.router.navigateByUrl('/login');
+    this.vitaapp.reloadData();
   }
 
   public verifyToken(): Observable<any> {

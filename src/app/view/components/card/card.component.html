@@ -1,34 +1,12 @@
-<div class="card">
-  <div
-    class="card-content"
-    [ngStyle]="{ 'background-color': '#' + helper.color }"
-    *ngIf="helper"
-  >
+<div
+  class="card"
+  *ngIf="category"
+  [ngStyle]="{ 'background-color': '#' + category.color }"
+>
+  <div class="card-content">
     <div class="card-body pb-0">
       <div class="media d-flex" (click)="clickedContent()">
-        <div class="align-self-center" style="max-width: 75px">
-          <img class="img-fluid" [src]="helper.imageUrl" alt="" />
-        </div>
-        <div class="media-body text-end" style="flex: 1 1 auto">
-          <h3 class="fw-bolder text-capitalize">{{ helper.name }}</h3>
-        </div>
-      </div>
-      <div class="gestion">
-        <div (click)="clickedDelete()">
-          <i class="fas fa-trash"></i> Eliminar
-        </div>
-        <div (click)="clickedEdit()"><i class="fas fa-edit"></i> Modificar</div>
-      </div>
-    </div>
-  </div>
-  <div
-    class="card-content"
-    [ngStyle]="{ 'background-color': '#' + category.color }"
-    *ngIf="category"
-  >
-    <div class="card-body pb-0">
-      <div class="media d-flex" (click)="clickedContent()">
-        <div class="align-self-center" style="max-width: 75px">
+        <div class="" style="max-width: 110px">
           <img class="img-fluid" [src]="category.imageUrl" alt="" />
         </div>
         <div class="media-body text-end" style="flex: 1 1 auto">
@@ -44,17 +22,20 @@
       </div>
     </div>
   </div>
-  <div
-    class="card-content"
-    [ngStyle]="{ 'background-color': '#' + categoryView.color }"
-    *ngIf="categoryView"
-  >
+</div>
+
+<div
+  class="card"
+  [ngStyle]="{ 'background-color': '#' + categoryView.color }"
+  *ngIf="categoryView"
+>
+  <div class="card-content">
     <div class="card__close">
       <i class="pi pi-times" *ngIf="showClose" (click)="clickedDelete()"></i>
     </div>
     <div class="card-body" (click)="clickedContent()">
       <div class="media d-flex">
-        <div class="align-self-center" style="max-width: 75px">
+        <div class="" style="max-width: 110px">
           <img class="img-fluid" [src]="categoryView.imageUrl" alt="" />
         </div>
         <div class="media-body text-end" style="flex: 1 1 auto">
@@ -64,16 +45,18 @@
       </div>
     </div>
   </div>
-  <div
-    class="card-content"
-    [ngStyle]="{
-      'background-color': '#' + subcategory.color
-    }"
-    *ngIf="subcategory"
-  >
+</div>
+<div
+  class="card"
+  [ngStyle]="{
+    'background-color': '#' + subcategory.color
+  }"
+  *ngIf="subcategory"
+>
+  <div class="card-content">
     <div class="card-body pb-0">
       <div class="media d-flex" (click)="clickedContent()">
-        <div class="align-self-center img-card" style="width: 75px">
+        <div class="img-card" style="width: 75px">
           <img class="img-fluid" [src]="subcategory.imageUrl" alt="" />
         </div>
         <div class="media-body text-end" style="flex: 1 1 auto">
@@ -89,11 +72,13 @@
       </div>
     </div>
   </div>
-  <div
-    class="card-content"
-    [ngStyle]="{ 'background-color': '#' + subcategoryView.color }"
-    *ngIf="subcategoryView"
-  >
+</div>
+<div
+  class="card"
+  [ngStyle]="{ 'background-color': '#' + subcategoryView.color }"
+  *ngIf="subcategoryView"
+>
+  <div class="card-content">
     <div class="card__close">
       <i class="pi pi-times" *ngIf="showClose" (click)="clickedDelete()"></i>
     </div>
@@ -102,7 +87,7 @@
     </div>
     <div class="card-body" (click)="clickedContent()">
       <div class="media d-flex">
-        <div class="align-self-center" style="max-width: 75px">
+        <div class="" style="max-width: 110px">
           <img class="img-fluid" [src]="subcategoryView.imageUrl" alt="" />
         </div>
         <div class="media-body text-end" style="flex: 1 1 auto">
@@ -112,20 +97,22 @@
       </div>
     </div>
   </div>
+</div>
 
-  <div
-    class="card-content"
-    [ngStyle]="{
-      'background-color': '#' + pictogramView.color
-    }"
-    *ngIf="pictogramView"
-  >
+<div
+  class="card"
+  [ngStyle]="{
+    'background-color': '#' + pictogramView.color
+  }"
+  *ngIf="pictogramView"
+>
+  <div class="card-content">
     <div class="card__close">
       <i class="pi pi-times" *ngIf="showClose" (click)="clickedDelete()"></i>
     </div>
-    <div class="card-body" (click)="clickedContent()">
+    <div class="card-body card-body-pic" (click)="clickedContent()">
       <div class="">
-        <div class="img-card" style="width: 100%">
+        <div class="img-card img-card-pic">
           <img class="img-fluid" [src]="pictogramView.imageUrl" alt="" />
         </div>
         <div class="media-body text-center pictogram__text">
@@ -134,13 +121,14 @@
       </div>
     </div>
   </div>
-  <div
-    class="card-content"
-    [ngStyle]="{
-      'background-color': '#' + pictogram.color
-    }"
-    *ngIf="pictogram"
-  >
+</div>
+<div
+  [ngStyle]="{
+    'background-color': '#' + pictogram.color
+  }"
+  *ngIf="pictogram"
+>
+  <div class="card-content">
     <div class="card-body p-0">
       <div class="">
         <div class="img-card" style="width: 100%">
@@ -155,6 +143,30 @@
           <i class="fas fa-trash"></i>
         </div>
         <div (click)="clickedEdit()"><i class="fas fa-edit"></i></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="card"
+  *ngIf="helper"
+  [ngStyle]="{ 'background-color': '#' + helper.color }"
+>
+  <div class="card-content">
+    <div class="card-body pb-0">
+      <div class="media d-flex" (click)="clickedContent()">
+        <div class="" style="max-width: 110px">
+          <img class="img-fluid" [src]="helper.imageUrl" alt="" />
+        </div>
+        <div class="media-body text-end" style="flex: 1 1 auto">
+          <h3 class="fw-bolder text-capitalize">{{ helper.name }}</h3>
+        </div>
+      </div>
+      <div class="gestion">
+        <div (click)="clickedDelete()">
+          <i class="fas fa-trash"></i> Eliminar
+        </div>
+        <div (click)="clickedEdit()"><i class="fas fa-edit"></i> Modificar</div>
       </div>
     </div>
   </div>

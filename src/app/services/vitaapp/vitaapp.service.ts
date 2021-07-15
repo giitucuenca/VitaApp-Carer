@@ -334,4 +334,8 @@ export class VitaappService {
     );
     return this.makePutRequest(PATH, pictogram);
   }
+
+  reloadData(): void {
+    this.carerInformation = undefined;
+  }
 }

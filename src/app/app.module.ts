@@ -53,12 +53,19 @@ import { ImagesRadioComponent } from './view/components/images-radio/images-radi
 import { EditPictogramHelperComponent } from './view/forms/helpers/edit-pictogram-helper/edit-pictogram-helper.component';
 import { ElderlyEditComponent } from './view/elderly/elderly-edit/elderly-edit.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { BadgeModule } from 'primeng/badge';
 
 // Firebase services + enviorment module
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { environment } from '../environments/environment';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { MessagesElderlyComponent } from './view/messages/messages-elderly/messages-elderly.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { LdsSpinnerComponent } from './view/components/lds-spinner/lds-spinner.component';
+import { GestionPanelComponent } from './view/board/gestion-panel/gestion-panel.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +106,9 @@ import { environment } from '../environments/environment';
     DragExampleComponent,
     EditPictogramHelperComponent,
     ElderlyEditComponent,
+    MessagesElderlyComponent,
+    LdsSpinnerComponent,
+    GestionPanelComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,11 +122,20 @@ import { environment } from '../environments/environment';
     SplitterModule,
     ButtonModule,
     DragDropModule,
-    ToastModule,
     ConfirmDialogModule,
+    ToastModule,
+    BadgeModule,
+    ScrollingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireMessagingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
   providers: [
     MessageService,

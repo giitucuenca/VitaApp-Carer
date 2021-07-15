@@ -1,0 +1,117 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins/respond-to";
+
+$header-height: 3.2rem; // 2rem p 1.2rem f-s
+
+.messages__container {
+  .title-container {
+    height: $height-header-top;
+    padding: 0.5rem;
+
+    border-bottom: 1px solid $gray-300;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 2000;
+    .panel-close {
+      position: absolute;
+      left: 1rem;
+      top: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      @include respond-md {
+        display: none;
+      }
+    }
+  }
+  .bg-black {
+    background-color: $gray-900;
+    color: white;
+  }
+  .users {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    min-height: calc(100vh - #{$header-height});
+    display: flex;
+    flex-direction: column;
+
+    @include respond-md {
+      width: 40% !important;
+      // height: auto !important;
+      height: 100vh;
+      border-right: 1px solid $gray-300;
+    }
+    @include respond-lg {
+      width: 30% !important;
+    }
+
+    @include respond-xl {
+      width: 25% !important;
+    }
+
+    .user {
+      padding: 0.5rem;
+      border-bottom: 1px solid $gray-300;
+      cursor: pointer;
+    }
+  }
+
+  .messages {
+    width: 0;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    @include respond-md {
+      width: 60% !important;
+      // height: auto !important;
+      height: 100vh;
+    }
+    @include respond-lg {
+      width: 70% !important;
+    }
+    @include respond-xl {
+      width: 75% !important;
+    }
+    .pictograms {
+      padding: 0.5rem;
+      height: 100%;
+      .content__cards {
+        border-bottom: 1px solid $gray-300;
+      }
+    }
+  }
+  .not-content {
+    width: 100%;
+    margin: auto;
+    padding: 1rem;
+    text-align: center;
+    .not-content_icon i {
+      font-size: 6rem;
+    }
+    .not-content_text {
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+  }
+}
+
+.messages-active {
+  min-height: calc(100vh - #{$header-height});
+}
+
+.form-check-input {
+  width: 3em;
+  height: 1.5em;
+}
+
+.bg-active {
+  background-color: $gray-200;
+}
+
+.example-item {
+  height: 50px;
+}

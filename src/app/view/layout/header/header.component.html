@@ -19,32 +19,40 @@
             routerLink="/adulto-mayor"
             routerLinkActive="border-color-primary"
           >
-            <i class="flaticon flaticon-couple"></i
+            <i class="flaticon flaticon-couple me-lg-3"></i
             ><span class="hidden__content"> Agregar Adulto</span>
           </li>
           <li
             routerLink="/asignar-tablero"
             routerLinkActive="border-color-primary"
           >
-            <i class="flaticon flaticon-bulletin-board"></i
+            <i class="flaticon flaticon-bulletin-board me-lg-3"></i
             ><span class="hidden__content"> Asignar Categorias</span>
           </li>
           <li
             routerLink="panel/editar-categorias"
             routerLinkActive="border-color-primary"
           >
-            <i class="flaticon flaticon-edit"></i
+            <i class="flaticon flaticon-edit me-lg-3"></i
             ><span class="hidden__content"> Editar</span>
           </li>
           <li
             routerLink="ayuda/crear-ayuda"
             routerLinkActive="border-color-primary"
           >
-            <i class="flaticon flaticon-help-1"></i
+            <i class="flaticon flaticon-help-1 me-lg-3"></i
             ><span class="hidden__content">Ayudas</span>
           </li>
+          <li routerLink="mensajes" routerLinkActive="border-color-primary">
+            <i
+              class="pi pi-envelope me-lg-3"
+              pBadge
+              [value]="firebase.totalNotRead"
+            ></i
+            ><span class="hidden__content">Mensajes</span>
+          </li>
           <li class="text-danger" (click)="logout()">
-            <i class="flaticon flaticon-logout"></i
+            <i class="flaticon flaticon-logout me-lg-3"></i
             ><span class="hidden__content"> Salir</span>
           </li>
         </ul>

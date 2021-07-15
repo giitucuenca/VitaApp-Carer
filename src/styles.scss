@@ -307,6 +307,33 @@ input[type="radio"] {
       width: 100%;
     }
   }
+
+  .content-pictogram_messages {
+    @include gap-separation;
+    width: calc(33.33333% - #{$gap});
+    @include respond-xs {
+      width: calc(25% - #{$gap});
+    }
+    @include respond-sm {
+      width: calc(20% - #{$gap});
+    }
+
+    @include respond-md {
+      width: calc(20% - #{$gap});
+    }
+
+    @include respond-lg {
+      width: calc(16.6666% - #{$gap});
+    }
+
+    @include respond-xl {
+      width: calc(12.5% - #{$gap});
+    }
+
+    & > div {
+      width: 100%;
+    }
+  }
 }
 
 .submenu {
@@ -317,7 +344,6 @@ input[type="radio"] {
 }
 
 .card {
-  background-color: transparent !important;
   border-radius: 1rem !important;
   border: 1px solid black;
   overflow: hidden !important;

@@ -1,3 +1,4 @@
+import { GestionPanelComponent } from './../view/board/gestion-panel/gestion-panel.component';
 import { EditPictogramsAssistanceComponent } from './carer/edit-pictograms-assistance/edit-pictograms-assistance.component';
 import { CrudOptionsPanelComponent } from './carer/crud-options-panel/crud-options-panel.component';
 import { LayoutComponent } from './layout/layout/layout.component';
@@ -102,6 +103,10 @@ export const routes: Routes = [
       {
         path: 'mensajes',
         component: MessagesElderlyComponent,
+      },
+      {
+        path: 'editar-grid',
+        component: GestionPanelComponent,
       },
     ],
     canActivate: [AuthGuard],

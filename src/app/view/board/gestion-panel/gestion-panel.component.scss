@@ -1,0 +1,59 @@
+@import "../../../../assets/scss/mixins/gap";
+@import "../../../../assets/scss/mixins/respond-to";
+.content__cards {
+  align-items: stretch;
+  .gestion-pictogram-grid__card {
+    @include gap-separation;
+    width: calc(25% - 0.5rem);
+    @include respond-md {
+      width: calc(20% - 0.5rem);
+    }
+    @include respond-lg {
+      width: calc(15% - 0.5rem);
+    }
+    @include respond-xl {
+      width: calc(10% - 0.5rem);
+    }
+  }
+  .gestion-message-grid__card {
+    @include gap-separation;
+    width: calc(25% - 0.5rem);
+    @include respond-md {
+      width: calc(40% - 0.5rem);
+    }
+    @include respond-lg {
+      width: calc(55% - 0.5rem);
+    }
+    @include respond-xl {
+      width: calc(70% - 0.5rem);
+    }
+
+    .cdk-drag,
+    .cdk-drop-list-dragging {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.cdk-drag {
+  .gestion-message__card {
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+  }
+}
+
+.editable-zone {
+  margin: 1rem 0 1rem;
+  padding: 0.5rem;
+  border: 3px dashed rgb(27, 146, 27);
+  h3 {
+    margin-top: -1.5rem;
+    font-size: 1.4rem;
+    color: rgb(27, 146, 27);
+    span {
+      background-color: #f5f7fa;
+    }
+  }
+}

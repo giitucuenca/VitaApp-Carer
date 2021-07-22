@@ -350,7 +350,12 @@ input[type="radio"] {
 }
 
 .move {
-  .card {
+  .card,
+  .template {
     cursor: move !important;
   }
+}
+
+ol li {
+  line-height: 1.5;
 }

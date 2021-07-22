@@ -1,1 +1,49 @@
-<p>gestion-panel works!</p>
+<section class="container">
+  <h1 class="title mt-5">Editar el panel de gestión del mensaje</h1>
+  <div class="mt-4">
+    <p>El panel de gestión del mensaje le permite al adulto mayor: <br>
+    </p>
+    <ol>
+      <li>Enviar el mensaje a usted su cuidador.</li>
+      <li>Borrar un pictograma del mensaje en caso de error.</li>
+      <li>Borrar toda la zona del mensaje para ingresar uno nuevo.</li>
+    </ol>
+    <p>Puede modificar el orden de este panel en caso de que el adulto mayor tenga alguna dificultad para interactuar
+      con el panel por defecto.</p>
+
+  </div>
+  <div>
+    <img class="w-100" src="assets/Images/prototipo.PNG" alt="prototipo de vitapp">
+  </div>
+  <div class="editable-zone">
+    <h3> <span>Zona Editable</span></h3>
+    <div class="content__cards" cdkDropListGroup *ngIf="pictograms.length" #gridContent>
+      <ng-container *ngFor="let pictogram of pictograms; let i = index">
+
+        <div class="gestion-pictogram-grid__card" cdkDropList cdkDropListOrientation="horizontal"
+          [cdkDropListData]="{ item: pictogram, index: i }" (cdkDropListDropped)="drop($event)"
+          *ngIf="pictogram.type === 'pic'">
+          <div class="inner move" cdkDrag>
+            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+            <app-card [pictogramView]="pictogram"></app-card>
+          </div>
+        </div>
+        <div class="gestion-message-grid__card" cdkDropList cdkDropListOrientation="horizontal"
+          [cdkDropListData]="{ item: pictogram, index: i }" (cdkDropListDropped)="drop($event)"
+          *ngIf="pictogram.type === 'msg'">
+          <div class="inner move" cdkDrag>
+            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+            <div class="gestion-message__card card">
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+
+  <div>
+    <img class="w-100" src="assets/Images/prototipo-inf.png" alt="prototipo de vitapp">
+  </div>
+
+</section>

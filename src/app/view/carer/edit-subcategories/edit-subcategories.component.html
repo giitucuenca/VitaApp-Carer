@@ -2,20 +2,15 @@
   <nav class="nav__top">
     <ul>
       <li>
-        <button
-          type="button"
-          class="btn"
-          role="button"
-          (click)="selectSubcategories()"
-        >
-          <i class="flaticon flaticon-plus"></i> Selecionar
+        <button type="button" class="btn" role="button" (click)="selectSubcategories()">
+          <i class="flaticon flaticon-plus"></i> Agregar
         </button>
       </li>
-      <li>
+      <!-- <li>
         <button type="button" class="btn" role="button" (click)="editGrid()">
           <i class="flaticon flaticon-plus"></i> Editar Cuadricula
         </button>
-      </li>
+      </li> -->
     </ul>
   </nav>
 </section>
@@ -23,13 +18,9 @@
   <h2 class="title">{{ pageCurrent }}</h2>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-bg">
-      <li
-        [ngClass]="
+      <li [ngClass]="
           i === 1 ? 'breadcrumb-item m-0 active' : 'breadcrumb-item m-0'
-        "
-        *ngFor="let item of subMenuNavigation; let i = index"
-        (click)="goToCategories(i)"
-      >
+        " *ngFor="let item of subMenuNavigation; let i = index" (click)="goToCategories(i)">
         {{ item }}
       </li>
     </ol>
@@ -38,42 +29,25 @@
 <section class="container container__global">
   <section class="form__add">
     <app-collapse-panel #panel>
-      <app-edit-subcategory
-        #editSubcategory
-        (collapse)="collapsePanel()"
-        (reloadSubcategories)="getSubcategoriesCarer()"
-      ></app-edit-subcategory>
+      <app-edit-subcategory #editSubcategory (collapse)="collapsePanel()"
+        (reloadSubcategories)="getSubcategoriesCarer()"></app-edit-subcategory>
     </app-collapse-panel>
   </section>
 
   <section class="mt-4">
     <div class="content__cards">
-      <div
-        class="content__card"
-        *ngFor="let subcategory of subcategoriesCarer; let i = index"
-      >
+      <div class="content__card" *ngFor="let subcategory of subcategoriesCarer; let i = index">
         <div>
-          <app-card
-            [subcategory]="subcategory"
-            (clickEdit)="updateSubcategory(subcategory)"
+          <app-card [subcategory]="subcategory" (clickEdit)="updateSubcategory(subcategory)"
             (clickContent)="showPictograms(subcategory.subcategoryCarerId)"
-            (clickDelete)="deleteSubcategory(subcategory.subcategoryCarerId)"
-          ></app-card>
+            (clickDelete)="deleteSubcategory(subcategory.subcategoryCarerId)"></app-card>
         </div>
       </div>
     </div>
   </section>
-  <app-message-not-content
-    *ngIf="!subcategoriesCarer.length"
-  ></app-message-not-content>
+  <app-message-not-content *ngIf="!subcategoriesCarer.length"></app-message-not-content>
 </section>
-<p-confirmDialog
-  [style]="{ width: '50vw' }"
-  key="positionDialog"
-  [position]="'top'"
-  [baseZIndex]="10000"
-  #cd
->
+<p-confirmDialog [style]="{ width: '50vw' }" key="positionDialog" [position]="'top'" [baseZIndex]="10000" #cd>
   <p-footer>
     <button type="button" class="btn btn-primary" (click)="cd.reject()">
       <i class="pi pi-times"></i> Cancelar

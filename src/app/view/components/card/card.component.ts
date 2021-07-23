@@ -20,6 +20,7 @@ export class CardComponent implements OnInit {
   @Input() showClose: boolean = false;
   @Output() clickEdit: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() clickDelete: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() clickGrid: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() clickContent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {}
@@ -36,5 +37,9 @@ export class CardComponent implements OnInit {
 
   clickedContent(): void {
     this.clickContent.emit(true);
+  }
+
+  clickedGrid(): void {
+    this.clickGrid.emit(true);
   }
 }

@@ -2,11 +2,11 @@ $flaticon-font: "flaticon";
 
 @font-face {
     font-family: $flaticon-font;
-    src: url("./flaticon.ttf?f0e179bbd4d7c303a5c04dc1883d8bd8") format("truetype"),
-url("./flaticon.woff?f0e179bbd4d7c303a5c04dc1883d8bd8") format("woff"),
-url("./flaticon.woff2?f0e179bbd4d7c303a5c04dc1883d8bd8") format("woff2"),
-url("./flaticon.eot?f0e179bbd4d7c303a5c04dc1883d8bd8#iefix") format("embedded-opentype"),
-url("./flaticon.svg?f0e179bbd4d7c303a5c04dc1883d8bd8#flaticon") format("svg");
+    src: url("./flaticon.ttf?14dd10770bc19f9e7da4617f4774702a") format("truetype"),
+url("./flaticon.woff?14dd10770bc19f9e7da4617f4774702a") format("woff"),
+url("./flaticon.woff2?14dd10770bc19f9e7da4617f4774702a") format("woff2"),
+url("./flaticon.eot?14dd10770bc19f9e7da4617f4774702a#iefix") format("embedded-opentype"),
+url("./flaticon.svg?14dd10770bc19f9e7da4617f4774702a#flaticon") format("svg");
 }
 
 i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
@@ -21,85 +21,113 @@ i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
 }
 
 $flaticon-map: (
-    "add-1": "\f101",
-    "add": "\f102",
-    "arrow": "\f103",
-    "bulletin-board": "\f104",
-    "check-mark": "\f105",
-    "comment": "\f106",
-    "couple": "\f107",
-    "delete-1": "\f108",
-    "delete": "\f109",
-    "edit": "\f10a",
-    "grandfather": "\f10b",
-    "grid": "\f10c",
-    "help-1": "\f10d",
-    "left-arrow": "\f10e",
-    "logout": "\f10f",
-    "pen": "\f110",
-    "plus": "\f111",
-    "profile": "\f112",
-    "schedule": "\f113",
-    "success": "\f114",
+    "couple": "\f101",
+    "bulletin-board": "\f102",
+    "schedule": "\f103",
+    "left-arrow": "\f104",
+    "arrow": "\f105",
+    "add": "\f106",
+    "logout": "\f107",
+    "plus": "\f108",
+    "add-1": "\f109",
+    "delete": "\f10a",
+    "delete-1": "\f10b",
+    "check-mark": "\f10c",
+    "success": "\f10d",
+    "edit": "\f10e",
+    "pen": "\f10f",
+    "profile": "\f110",
+    "grid": "\f111",
+    "comment": "\f112",
+    "grandfather": "\f113",
+    "help-1": "\f114",
+    "folder-1": "\f115",
+    "planet": "\f116",
+    "oops-1": "\f117",
+    "delete-2": "\f118",
+    "grid-2": "\f119",
+    "header": "\f11a",
+    "header-1": "\f11b",
 );
 
-.flaticon-add-1:before {
-    content: map-get($flaticon-map, "add-1");
-}
-.flaticon-add:before {
-    content: map-get($flaticon-map, "add");
-}
-.flaticon-arrow:before {
-    content: map-get($flaticon-map, "arrow");
+.flaticon-couple:before {
+    content: map-get($flaticon-map, "couple");
 }
 .flaticon-bulletin-board:before {
     content: map-get($flaticon-map, "bulletin-board");
 }
-.flaticon-check-mark:before {
-    content: map-get($flaticon-map, "check-mark");
-}
-.flaticon-comment:before {
-    content: map-get($flaticon-map, "comment");
-}
-.flaticon-couple:before {
-    content: map-get($flaticon-map, "couple");
-}
-.flaticon-delete-1:before {
-    content: map-get($flaticon-map, "delete-1");
-}
-.flaticon-delete:before {
-    content: map-get($flaticon-map, "delete");
-}
-.flaticon-edit:before {
-    content: map-get($flaticon-map, "edit");
-}
-.flaticon-grandfather:before {
-    content: map-get($flaticon-map, "grandfather");
-}
-.flaticon-grid:before {
-    content: map-get($flaticon-map, "grid");
-}
-.flaticon-help-1:before {
-    content: map-get($flaticon-map, "help-1");
+.flaticon-schedule:before {
+    content: map-get($flaticon-map, "schedule");
 }
 .flaticon-left-arrow:before {
     content: map-get($flaticon-map, "left-arrow");
 }
+.flaticon-arrow:before {
+    content: map-get($flaticon-map, "arrow");
+}
+.flaticon-add:before {
+    content: map-get($flaticon-map, "add");
+}
 .flaticon-logout:before {
     content: map-get($flaticon-map, "logout");
-}
-.flaticon-pen:before {
-    content: map-get($flaticon-map, "pen");
 }
 .flaticon-plus:before {
     content: map-get($flaticon-map, "plus");
 }
-.flaticon-profile:before {
-    content: map-get($flaticon-map, "profile");
+.flaticon-add-1:before {
+    content: map-get($flaticon-map, "add-1");
 }
-.flaticon-schedule:before {
-    content: map-get($flaticon-map, "schedule");
+.flaticon-delete:before {
+    content: map-get($flaticon-map, "delete");
+}
+.flaticon-delete-1:before {
+    content: map-get($flaticon-map, "delete-1");
+}
+.flaticon-check-mark:before {
+    content: map-get($flaticon-map, "check-mark");
 }
 .flaticon-success:before {
     content: map-get($flaticon-map, "success");
+}
+.flaticon-edit:before {
+    content: map-get($flaticon-map, "edit");
+}
+.flaticon-pen:before {
+    content: map-get($flaticon-map, "pen");
+}
+.flaticon-profile:before {
+    content: map-get($flaticon-map, "profile");
+}
+.flaticon-grid:before {
+    content: map-get($flaticon-map, "grid");
+}
+.flaticon-comment:before {
+    content: map-get($flaticon-map, "comment");
+}
+.flaticon-grandfather:before {
+    content: map-get($flaticon-map, "grandfather");
+}
+.flaticon-help-1:before {
+    content: map-get($flaticon-map, "help-1");
+}
+.flaticon-folder-1:before {
+    content: map-get($flaticon-map, "folder-1");
+}
+.flaticon-planet:before {
+    content: map-get($flaticon-map, "planet");
+}
+.flaticon-oops-1:before {
+    content: map-get($flaticon-map, "oops-1");
+}
+.flaticon-delete-2:before {
+    content: map-get($flaticon-map, "delete-2");
+}
+.flaticon-grid-2:before {
+    content: map-get($flaticon-map, "grid-2");
+}
+.flaticon-header:before {
+    content: map-get($flaticon-map, "header");
+}
+.flaticon-header-1:before {
+    content: map-get($flaticon-map, "header-1");
 }

@@ -15,6 +15,7 @@
           <i class="fas fa-trash"></i> Eliminar
         </div>
         <div (click)="clickedEdit()"><i class="fas fa-edit"></i> Modificar</div>
+        <div (click)="clickedGrid()"><i class="flaticon-grid-2"></i> Grid</div>
       </div>
     </div>
   </div>
@@ -102,7 +103,7 @@
     </div>
   </div>
 </div>
-<div [ngStyle]="{
+<div class="card" [ngStyle]="{
     'background-color': '#' + pictogram.color
   }" *ngIf="pictogram">
   <div class="card-content">

@@ -338,4 +338,22 @@ export class VitaappService {
   reloadData(): void {
     this.carerInformation = undefined;
   }
+
+  // *------------------------Ayudas-----------------------------
+
+  getPositionAdminPanel(): Observable<any> {
+    if (this.carerInformation && this.carerInformation.carerId) {
+      const PATH = this.concatURL(
+        `/carer/position-first-row/${this.carerInformation.carerId}`
+      );
+      return this.makeGetRequest(PATH);
+    } else {
+      return of([]);
+    }
+  }
+
+  savePositionAdminPanel(data: any): Observable<any> {
+    const PATH = this.concatURL(`/carer/position-first-row`);
+    return this.makePutRequest(PATH, data);
+  }
 }

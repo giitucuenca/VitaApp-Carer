@@ -2,13 +2,8 @@
   <nav class="nav__top">
     <ul>
       <li>
-        <button
-          type="button"
-          class="btn"
-          role="button"
-          (click)="selectPictograms()"
-        >
-          <i class="flaticon flaticon-plus"></i> Selecionar
+        <button type="button" class="btn" role="button" (click)="selectPictograms()">
+          <i class="flaticon flaticon-plus"></i> Agregar
         </button>
       </li>
     </ul>
@@ -18,13 +13,9 @@
   <h2 class="title">{{ pageCurrent }}</h2>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-bg">
-      <li
-        [ngClass]="
+      <li [ngClass]="
           i === 2 ? 'breadcrumb-item m-0 active' : 'breadcrumb-item  m-0'
-        "
-        *ngFor="let item of subMenuNavigation; let i = index"
-        (click)="goToPage(i)"
-      >
+        " *ngFor="let item of subMenuNavigation; let i = index" (click)="goToPage(i)">
         {{ item }}
       </li>
     </ol>
@@ -33,46 +24,29 @@
 <section class="container container__global">
   <section class="form__add">
     <app-collapse-panel #panel>
-      <app-edit-pictogram
-        #editPictogram
-        (collapse)="collapsePanel()"
-        (reloadPictograms)="getPictogramsCarer()"
-      ></app-edit-pictogram>
+      <app-edit-pictogram #editPictogram (collapse)="collapsePanel()" (reloadPictograms)="getPictogramsCarer()">
+      </app-edit-pictogram>
     </app-collapse-panel>
   </section>
   <hr />
   <section>
     <div class="content__cards">
-      <div
-        class="content-pictogram__card"
-        *ngFor="let pictogram of pictogramsCarer; let i = index"
-      >
+      <div class="content-pictogram__card" *ngFor="let pictogram of pictogramsCarer; let i = index">
         <div>
-          <app-card
-            [pictogram]="pictogram"
-            (clickEdit)="updatePictogram(pictogram)"
-            (clickDelete)="deletePictogram(pictogram.pictogramCarerId)"
-          ></app-card>
+          <app-card [pictogram]="pictogram" (clickEdit)="updatePictogram(pictogram)"
+            (clickDelete)="deletePictogram(pictogram.pictogramCarerId)"></app-card>
         </div>
       </div>
     </div>
   </section>
-  <app-message-not-content
-    *ngIf="!pictogramsCarer.length"
-  ></app-message-not-content>
+  <app-message-not-content *ngIf="!pictogramsCarer.length"></app-message-not-content>
 </section>
 
 <!-- <section class="submenu">
   <app-submenu [showEdit]="true"></app-submenu>
 </section> -->
 
-<p-confirmDialog
-  [style]="{ width: '50vw' }"
-  key="positionDialog"
-  [position]="'top'"
-  [baseZIndex]="10000"
-  #cd
->
+<p-confirmDialog [style]="{ width: '50vw' }" key="positionDialog" [position]="'top'" [baseZIndex]="10000" #cd>
   <p-footer>
     <button type="button" class="btn btn-primary" (click)="cd.reject()">
       <i class="pi pi-times"></i> Cancelar

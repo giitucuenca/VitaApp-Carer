@@ -16,30 +16,25 @@
 </section> -->
 <section class="container container__global">
   <section class="form__add">
-    <p-fieldset
-      p-fieldset
-      legend="Agregar Adulto"
-      [toggleable]="true"
-      [collapsed]="true"
-    >
+    <p-fieldset p-fieldset legend="Agregar Adulto" [toggleable]="true" [collapsed]="true">
       <app-elderly-add (reload)="getElderlies()"></app-elderly-add>
     </p-fieldset>
   </section>
   <section class="form__add">
     <app-collapse-panel #panel>
-      <app-elderly-edit
-        #editElderlyForm
-        (reload)="getElderlies()"
-        (collapse)="collapsePanel()"
-      ></app-elderly-edit>
+      <app-elderly-edit #editElderlyForm (reload)="getElderlies()" (collapse)="collapsePanel()"></app-elderly-edit>
     </app-collapse-panel>
   </section>
   <section class="elderly__list container mt-4">
     <table class="table">
       <thead class="table-dark">
         <tr>
-          <th scope="col" class="col__1"><h4 class="m-0">Adulto</h4></th>
-          <th scope="col" class="col__2"><h4 class="m-0">Gestion</h4></th>
+          <th scope="col" class="col__1">
+            <h4 class="m-0">Adulto</h4>
+          </th>
+          <th scope="col" class="col__2">
+            <h4 class="m-0">Gestion</h4>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -51,15 +46,9 @@
             <p>{{ elderly.username }}</p>
           </th>
           <th scope="col">
-            <button
-              (click)="editElderly(elderly)"
-              class="btn btn-warning text-white me-2"
-            >
-              <i class="fas fa-edit"></i></button
-            ><button
-              (click)="deleteElderly(elderly.elderlyId)"
-              class="btn btn-danger text-white"
-            >
+            <button (click)="editElderly(elderly)" class="btn btn-warning text-white me-2">
+              <i class="fas fa-edit"></i></button><button (click)="deleteElderly(elderly.elderlyId)"
+              class="btn btn-danger text-white">
               <i class="fas fa-trash"></i>
             </button>
           </th>
@@ -67,15 +56,10 @@
       </tbody>
     </table>
   </section>
+  <app-message-not-content *ngIf="!elderlies.length"></app-message-not-content>
 </section>
 
-<p-confirmDialog
-  [style]="{ width: '50vw' }"
-  key="positionDialog"
-  [position]="'top'"
-  [baseZIndex]="10000"
-  #cd
->
+<p-confirmDialog [style]="{ width: '50vw' }" key="positionDialog" [position]="'top'" [baseZIndex]="10000" #cd>
   <p-footer>
     <button type="button" class="btn btn-primary" (click)="cd.reject()">
       <i class="pi pi-times"></i> Cancelar

@@ -25,6 +25,7 @@
   flex: 1 1 auto;
   width: calc(100%);
   position: relative;
+  margin-bottom: 1rem;
   @include respond-md {
     padding-left: 1rem;
   }

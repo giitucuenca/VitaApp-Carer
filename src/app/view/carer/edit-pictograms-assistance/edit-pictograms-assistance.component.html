@@ -2,7 +2,7 @@
   <ul>
     <li>
       <button type="button" class="btn" role="button" (click)="selectHelpers()">
-        <i class="flaticon flaticon-plus"></i> Seleccionar Ayuda
+        <i class="flaticon flaticon-plus"></i> Agregar
       </button>
     </li>
   </ul>
@@ -11,13 +11,9 @@
   <h2 class="title">{{ pageCurrent }}</h2>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-bg">
-      <li
-        [ngClass]="
+      <li [ngClass]="
           i === 1 ? 'breadcrumb-item m-0 active' : 'breadcrumb-item m-0'
-        "
-        *ngFor="let item of subMenuNavigation; let i = index"
-        (click)="goToHelpers()"
-      >
+        " *ngFor="let item of subMenuNavigation; let i = index" (click)="goToHelpers()">
         {{ item }}
       </li>
     </ol>
@@ -26,44 +22,26 @@
 <section class="container container__global">
   <section class="form__add">
     <app-collapse-panel #panel>
-      <app-edit-pictogram-helper
-        #editPictogram
-        (collapse)="collapsePanel()"
-        (reload)="getPictogramsByHelperId()"
-      ></app-edit-pictogram-helper>
+      <app-edit-pictogram-helper #editPictogram (collapse)="collapsePanel()" (reload)="getPictogramsByHelperId()">
+      </app-edit-pictogram-helper>
     </app-collapse-panel>
   </section>
   <section class="mt-4">
     <div class="content__cards">
-      <div
-        class="content-pictogram__card"
-        *ngFor="let pictogram of pictogramsHelper; let i = index"
-      >
+      <div class="content-pictogram__card" *ngFor="let pictogram of pictogramsHelper; let i = index">
         <div>
-          <app-card
-            [pictogram]="pictogram"
-            (clickEdit)="updatePictogram(pictogram)"
-            (clickContent)="showSelectAsistense(i)"
-            (clickDelete)="
+          <app-card [pictogram]="pictogram" (clickEdit)="updatePictogram(pictogram)"
+            (clickContent)="showSelectAsistense(i)" (clickDelete)="
               deletePictogramHelperCarer(pictogram.pictogramCarerId)
-            "
-          ></app-card>
+            "></app-card>
         </div>
       </div>
     </div>
   </section>
-  <app-message-not-content
-    *ngIf="!pictogramsHelper.length"
-  ></app-message-not-content>
+  <app-message-not-content *ngIf="!pictogramsHelper.length"></app-message-not-content>
 </section>
 
-<p-confirmDialog
-  [style]="{ width: '50vw' }"
-  key="positionDialog"
-  [position]="'top'"
-  [baseZIndex]="10000"
-  #cd
->
+<p-confirmDialog [style]="{ width: '50vw' }" key="positionDialog" [position]="'top'" [baseZIndex]="10000" #cd>
   <p-footer>
     <button type="button" class="btn btn-primary" (click)="cd.reject()">
       <i class="pi pi-times"></i> Cancelar

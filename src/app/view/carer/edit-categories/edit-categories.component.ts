@@ -111,4 +111,7 @@ export class EditCategoriesComponent implements OnInit {
       ...msg,
     });
   }
+  editGrid(categoryId: number): void {
+    this.router.navigate(['/panel/editar-grid', categoryId]);
+  }
 }

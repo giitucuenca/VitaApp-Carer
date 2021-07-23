@@ -2,13 +2,14 @@
   <nav class="nav__top">
     <ul>
       <li>
-        <button
-          type="button"
-          class="btn"
-          role="button"
-          routerLink="/panel/seleccionar-categorias"
-        >
-          <i class="flaticon flaticon-plus"></i> Selecionar
+        <button type="button" class="btn" role="button" routerLink="/panel/seleccionar-categorias">
+          <i class="flaticon flaticon-plus"></i> <span class="d-none d-md-inline"> Agregar</span>
+        </button>
+      </li>
+
+      <li>
+        <button type="button" class="btn" role="button" routerLink="/editar-grid">
+          <i class="flaticon-header-1"></i> <span class="d-none d-md-inline"> Editar Grid Mensaje</span>
         </button>
       </li>
     </ul>
@@ -18,12 +19,9 @@
   <h2 class="title">{{ pageCurrent }}</h2>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-bg">
-      <li
-        [ngClass]="
+      <li [ngClass]="
           i === 0 ? 'breadcrumb-item m-0 active' : 'breadcrumb-item h2 m-0'
-        "
-        *ngFor="let item of subMenuNavigation; let i = index"
-      >
+        " *ngFor="let item of subMenuNavigation; let i = index">
         {{ item }}
       </li>
     </ol>
@@ -32,43 +30,27 @@
 <section class="container container__global">
   <section class="form__add">
     <app-collapse-panel #panel>
-      <app-edit-category
-        #editCategory
-        (collapse)="collapsePanel()"
-        (reloadCategories)="getCategoriesCarer()"
-      ></app-edit-category>
+      <app-edit-category #editCategory (collapse)="collapsePanel()" (reloadCategories)="getCategoriesCarer()">
+      </app-edit-category>
     </app-collapse-panel>
   </section>
 
   <section class="mt-4">
     <div class="content__cards">
-      <div
-        class="content__card"
-        *ngFor="let category of categoriesCarer; let i = index"
-      >
+      <div class="content__card" *ngFor="let category of categoriesCarer; let i = index">
         <div>
-          <app-card
-            [category]="category"
-            (clickEdit)="updateCategory(category)"
+          <app-card [category]="category" (clickEdit)="updateCategory(category)"
             (clickContent)="showSubcategories(category.categoryCarerId)"
-            (clickDelete)="deleteCategory(category.categoryCarerId)"
-          ></app-card>
+            (clickDelete)="deleteCategory(category.categoryCarerId)" (clickGrid)="editGrid(category.categoryCarerId)">
+          </app-card>
         </div>
       </div>
     </div>
   </section>
-  <app-message-not-content
-    *ngIf="!categoriesCarer.length"
-  ></app-message-not-content>
+  <app-message-not-content *ngIf="!categoriesCarer.length"></app-message-not-content>
 </section>
 
-<p-confirmDialog
-  [style]="{ width: '50vw' }"
-  key="positionDialog"
-  [position]="'top'"
-  [baseZIndex]="10000"
-  #cd
->
+<p-confirmDialog [style]="{ width: '50vw' }" key="positionDialog" [position]="'top'" [baseZIndex]="10000" #cd>
   <p-footer>
     <button type="button" class="btn btn-primary" (click)="cd.reject()">
       <i class="pi pi-times"></i> Cancelar

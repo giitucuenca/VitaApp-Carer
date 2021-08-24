@@ -67,6 +67,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { LdsSpinnerComponent } from './view/components/lds-spinner/lds-spinner.component';
 import { GestionPanelComponent } from './view/board/gestion-panel/gestion-panel.component';
 
+// probando git-hub
+
 @NgModule({
   declarations: [
     AppComponent,

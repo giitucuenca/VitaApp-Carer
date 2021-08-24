@@ -1,26 +1,16 @@
 <div class="header__info">Seleccione</div>
 <section class="global__container">
   <div class="categories__container">
-    <p-splitter
-      [style]="{ height: '100%' }"
-      styleClass="p-mb-5"
-      layout="vertical"
-    >
+    <p-splitter [style]="{ height: '100%' }" styleClass="p-mb-5" layout="vertical">
       <ng-template class="content_global" pTemplate>
         <div class="p-col content_p-panel">
-          <div class="h4"><small>Subcategorias Seleccionadas</small></div>
+          <div class="h4"><small>Subcategorías Seleccionadas</small></div>
           <hr />
           <div class="content__cards">
-            <div
-              class="content__card"
-              *ngFor="let subcategory of subcategoriesCarer; let i = index"
-            >
+            <div class="content__card" *ngFor="let subcategory of subcategoriesCarer; let i = index">
               <div>
-                <app-card
-                  [subcategoryView]="subcategory"
-                  [showClose]="true"
-                  (clickDelete)="deleteSubcategoryCarer(i)"
-                ></app-card>
+                <app-card [subcategoryView]="subcategory" [showClose]="true" (clickDelete)="deleteSubcategoryCarer(i)">
+                </app-card>
               </div>
             </div>
           </div>
@@ -28,18 +18,12 @@
       </ng-template>
       <ng-template pTemplate>
         <div class="p-col content_p-panel">
-          <div class="h4"><small>Subcategorias</small></div>
+          <div class="h4"><small>Subcategorías</small></div>
           <hr />
           <div class="content__cards">
-            <div
-              class="content__card"
-              *ngFor="let subcategory of subcategories"
-            >
+            <div class="content__card" *ngFor="let subcategory of subcategories">
               <div>
-                <app-card
-                  [subcategoryView]="subcategory"
-                  (clickContent)="addSubcategoryCarer(subcategory)"
-                ></app-card>
+                <app-card [subcategoryView]="subcategory" (clickContent)="addSubcategoryCarer(subcategory)"></app-card>
               </div>
             </div>
           </div>
@@ -49,9 +33,5 @@
   </div>
 </section>
 <section class="submenu">
-  <app-submenu
-    [showEdit]="true"
-    (clickEdit)="showOption()"
-    (clickSave)="saveListSubcategories()"
-  ></app-submenu>
+  <app-submenu [showEdit]="true" (clickEdit)="showOption()" (clickSave)="saveListSubcategories()"></app-submenu>
 </section>

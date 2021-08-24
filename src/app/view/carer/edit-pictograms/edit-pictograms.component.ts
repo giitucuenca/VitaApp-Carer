@@ -18,7 +18,7 @@ export class EditPictogramsComponent implements OnInit {
   subcategoryId: number;
   pictogramsCarer: PictogramCarer[] = [];
   idEdit = -1;
-  subMenuNavigation = ['Categorias', 'Subcategoria', 'Pictogramas'];
+  subMenuNavigation = ['Categorías', 'Subcategoría', 'Pictogramas'];
   pageCurrent: string;
 
   constructor(

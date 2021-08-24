@@ -157,7 +157,7 @@ export class ElderlyCategoriesComponent implements OnInit, AfterViewChecked {
             const msg = {
               severity: 'success',
               summary: 'Realizado',
-              detail: 'Se asigno correctamente las categorias al adulto.',
+              detail: 'Se asigno correctamente las categorías al adulto.',
             };
             this.message.createMessage(msg);
           },

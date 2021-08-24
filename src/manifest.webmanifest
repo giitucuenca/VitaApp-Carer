@@ -1,6 +1,6 @@
 {
-  "name": "vitaapp-web-carer-ucuenca",
-  "short_name": "vitaapp-web-carer-ucuenca",
+  "name": "VA-carer",
+  "short_name": "VA-carer",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

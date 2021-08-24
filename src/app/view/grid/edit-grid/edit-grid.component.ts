@@ -104,7 +104,7 @@ export class EditGridComponent implements OnInit, AfterViewChecked, OnDestroy {
           const msg = {
             severity: 'success',
             summary: 'Realizado',
-            detail: 'Se asigno la ayuda a la categoria.',
+            detail: 'Se asigno la ayuda a la categoría.',
           };
           this.message.createMessage(msg);
         },
@@ -112,7 +112,7 @@ export class EditGridComponent implements OnInit, AfterViewChecked, OnDestroy {
           const msg = {
             severity: 'error',
             summary: 'Error',
-            detail: 'Error al asignar la ayuda a la categoria.',
+            detail: 'Error al asignar la ayuda a la categoría.',
           };
           this.message.createMessage(msg);
         }

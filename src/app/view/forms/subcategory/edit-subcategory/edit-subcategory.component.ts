@@ -59,21 +59,21 @@ export class EditSubcategoryComponent implements OnInit {
           const msg = {
             severity: 'success',
             summary: 'Realizado',
-            detail: 'Se modificó la subcategoria correctamente.',
+            detail: 'Se modificó la subcategoría correctamente.',
           };
           this.message.createMessage(msg);
 
-          // Notify('Categoria agregada correctamente.', null, null, 'success');
+          // Notify('Categoría agregada correctamente.', null, null, 'success');
         },
         (err) => {
           console.log(err);
           const msg = {
             severity: 'error',
             summary: 'Error',
-            detail: 'Error al modificar la subcategoria.',
+            detail: 'Error al modificar la subcategoría.',
           };
           this.message.createMessage(msg);
-          // Notify('Error al agregar una categoria.', null, null, 'danger');
+          // Notify('Error al agregar una categoría.', null, null, 'danger');
         }
       );
     } else {

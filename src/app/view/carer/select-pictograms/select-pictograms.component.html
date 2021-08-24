@@ -1,26 +1,16 @@
 <div class="header__info">Seleccione los Pictogramas</div>
 <section class="global__container">
   <div class="categories__container">
-    <p-splitter
-      [style]="{ height: '100%' }"
-      styleClass="p-mb-5"
-      layout="vertical"
-    >
+    <p-splitter [style]="{ height: '100%' }" styleClass="p-mb-5" layout="vertical">
       <ng-template class="content_global" pTemplate>
         <div class="p-col content_p-panel">
-          <div class="h4"><small>Categorias Seleccionadas</small></div>
+          <div class="h4"><small>Pictogramas Seleccionados</small></div>
           <hr />
           <div class="content__cards">
-            <div
-              class="content-pictogram__card"
-              *ngFor="let pictogram of pictogramsCarer; let i = index"
-            >
+            <div class="content-pictogram__card" *ngFor="let pictogram of pictogramsCarer; let i = index">
               <div>
-                <app-card
-                  [pictogramView]="pictogram"
-                  [showClose]="true"
-                  (clickDelete)="deletePictogramCarer(i)"
-                ></app-card>
+                <app-card [pictogramView]="pictogram" [showClose]="true" (clickDelete)="deletePictogramCarer(i)">
+                </app-card>
               </div>
             </div>
           </div>
@@ -28,18 +18,12 @@
       </ng-template>
       <ng-template pTemplate>
         <div class="p-col content_p-panel">
-          <div class="h4"><small>Categorias</small></div>
+          <div class="h4"><small>Pictogramas</small></div>
           <hr />
           <div class="content__cards">
-            <div
-              class="content-pictogram__card"
-              *ngFor="let pictogram of pictograms"
-            >
+            <div class="content-pictogram__card" *ngFor="let pictogram of pictograms">
               <div>
-                <app-card
-                  [pictogramView]="pictogram"
-                  (clickContent)="addPictogramCarer(pictogram)"
-                ></app-card>
+                <app-card [pictogramView]="pictogram" (clickContent)="addPictogramCarer(pictogram)"></app-card>
               </div>
             </div>
           </div>
@@ -49,9 +33,5 @@
   </div>
 </section>
 <section class="submenu">
-  <app-submenu
-    [showEdit]="true"
-    (clickEdit)="showOption()"
-    (clickSave)="saveListPictograms()"
-  ></app-submenu>
+  <app-submenu [showEdit]="true" (clickEdit)="showOption()" (clickSave)="saveListPictograms()"></app-submenu>
 </section>

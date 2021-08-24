@@ -18,7 +18,7 @@ import { EditSubcategoryComponent } from '../../forms/subcategory/edit-subcatego
 export class EditSubcategoriesComponent implements OnInit {
   @ViewChild('panel') panel: CollapsePanelComponent;
   @ViewChild('editSubcategory') editSubcategory: EditSubcategoryComponent;
-  subMenuNavigation = ['Categorias', 'Subcategoria'];
+  subMenuNavigation = ['Categorías', 'Subcategoría'];
   pageCurrent: string;
 
   idEdit = -1;
@@ -73,8 +73,8 @@ export class EditSubcategoriesComponent implements OnInit {
 
   deleteSubcategory(subcategoryId: number): void {
     this.confirmationService.confirm({
-      message: 'Esta seguro que desea eliminar la subcategoria.',
-      header: 'Quiere eliminar la subcategoria',
+      message: 'Esta seguro que desea eliminar la subcategoría.',
+      header: 'Quiere eliminar la subcategoría',
       icon: 'pi pi-info-circle',
       accept: () => {
         this.vitaapp.deleteSubcategory(subcategoryId).subscribe(
@@ -82,7 +82,7 @@ export class EditSubcategoriesComponent implements OnInit {
             const msg = {
               severity: 'success',
               summary: 'Realizado',
-              detail: 'Se elimino la subcategoria.',
+              detail: 'Se elimino la subcategoría.',
             };
             this.showMessage(msg);
             this.getSubcategoriesCarer();

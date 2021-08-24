@@ -22,8 +22,8 @@ export class EditCategoriesComponent implements OnInit {
 
   categoriesCarer: CategoryCarer[] = [];
 
-  subMenu = ['Categorias', 'Subcategoria', 'Pictogramas'];
-  subMenuNavigation = ['Categorias'];
+  subMenu = ['Categorías', 'Subcategoría', 'Pictogramas'];
+  subMenuNavigation = ['Categorías'];
   pageCurrent: string;
 
   constructor(
@@ -69,8 +69,8 @@ export class EditCategoriesComponent implements OnInit {
 
   deleteCategory(categoryId: number): void {
     this.confirmationService.confirm({
-      message: 'Esta seguro que desea eliminar la categoria.',
-      header: 'Quiere eliminar la categoria',
+      message: 'Esta seguro que desea eliminar la categoría.',
+      header: 'Quiere eliminar la categoría',
       icon: 'pi pi-info-circle',
       accept: () => {
         this.vitaapp.deleteCategory(categoryId).subscribe(
@@ -78,7 +78,7 @@ export class EditCategoriesComponent implements OnInit {
             const msg = {
               severity: 'success',
               summary: 'Realizado',
-              detail: 'Se elimino la categoria.',
+              detail: 'Se elimino la categoría.',
             };
             this.showMessage(msg);
             this.getCategoriesCarer();

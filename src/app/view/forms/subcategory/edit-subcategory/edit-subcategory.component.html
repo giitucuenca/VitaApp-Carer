@@ -1,58 +1,29 @@
 <section>
   <div class="container__form">
-    <h3 class="title">Agregar Categoria</h3>
+    <h3 class="title">Agregar Categoría</h3>
     <form [formGroup]="formSubcategory" (ngSubmit)="saveSubcategory()">
       <div class="mb-3">
-        <label class="form-label" for="formEditSubName"
-          >Nombre de la Categoria</label
-        >
+        <label class="form-label" for="formEditSubName">Nombre de la Categoría</label>
         <div class="input__border">
-          <input
-            type="text"
-            class="form-control"
-            name=""
-            id="formEditSubName"
-            aria-describedby="helpId"
-            placeholder="Ingrese el nombre de la Categoria"
-            formControlName="name"
-            [class.is-invalid]="invalidName"
-          />
+          <input type="text" class="form-control" name="" id="formEditSubName" aria-describedby="helpId"
+            placeholder="Ingrese el nombre de la Categoría" formControlName="name" [class.is-invalid]="invalidName" />
         </div>
 
-        <small class="form-text text-danger" *ngIf="invalidName"
-          >Ingrese un nombre</small
-        >
+        <small class="form-text text-danger" *ngIf="invalidName">Ingrese un nombre</small>
       </div>
       <div class="mb-3">
-        <label class="form-label" for="formEditSubDescri"
-          >Descripcion de la Categoria</label
-        >
-        <textarea
-          class="form-control"
-          name=""
-          id="formEditSubDescri"
-          rows="3"
-          formControlName="description"
-          [class.is-invalid]="invalidDescription"
-        ></textarea>
-        <small class="form-text text-danger" *ngIf="invalidDescription"
-          >Ingrese una description</small
-        >
+        <label class="form-label" for="formEditSubDescri">Descripcion de la Categoría</label>
+        <textarea class="form-control" name="" id="formEditSubDescri" rows="3" formControlName="description"
+          [class.is-invalid]="invalidDescription"></textarea>
+        <small class="form-text text-danger" *ngIf="invalidDescription">Ingrese una description</small>
       </div>
       <div class="mb-3">
         <label class="form-label" for="">Pictograma de la subcategoría</label>
-        <app-images-radio
-          [usedBy]="'subcategoryEdit'"
-          #imageRadioSubcategory
-        ></app-images-radio>
+        <app-images-radio [usedBy]="'subcategoryEdit'" #imageRadioSubcategory></app-images-radio>
       </div>
       <div class="my-3 form__btn">
         <button type="submit" class="btn btn-primary">Enviar</button>
-        <button
-          type="button"
-          class="btn btn-danger text-white"
-          (click)="collapsePanel()"
-        >
+        <button type="button" class="btn btn-danger text-white" (click)="collapsePanel()">
           Cancelar
         </button>
       </div>

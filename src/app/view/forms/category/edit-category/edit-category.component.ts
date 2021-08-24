@@ -96,20 +96,20 @@ export class EditCategoryComponent implements OnInit {
           const msg = {
             severity: 'success',
             summary: 'Realizado',
-            detail: 'Se modificó la categoria correctamente.',
+            detail: 'Se modificó la categoría correctamente.',
           };
           this.message.createMessage(msg);
-          // Notify('Categoria agregada correctamente.', null, null, 'success');
+          // Notify('Categoría agregada correctamente.', null, null, 'success');
         },
         (err) => {
           console.log(err);
           const msg = {
             severity: 'error',
             summary: 'Error',
-            detail: 'Error al modificar la categoria.',
+            detail: 'Error al modificar la categoría.',
           };
           this.message.createMessage(msg);
-          // Notify('Error al agregar una categoria.', null, null, 'danger');
+          // Notify('Error al agregar una categoría.', null, null, 'danger');
         }
       );
     } else {

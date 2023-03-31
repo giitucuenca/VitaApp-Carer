@@ -43,8 +43,8 @@
           </div>
         </div>
         <div class="w-100 my-2 pe-2 text-end">
-          {{ message.timestamp.seconds * 1000 | date: "H:mm a" }} |
-          {{ message.timestamp.seconds * 1000 | date: "MMM d" }}
+          {{ message.timestamp.seconds * 1000 | date : "H:mm a" }} |
+          {{ message.timestamp.seconds * 1000 | date : "MMM d" }}
         </div>
       </div>
     </cdk-virtual-scroll-viewport>

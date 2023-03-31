@@ -9,7 +9,6 @@ import {
 import { ChatRoom } from 'src/app/controller/interfaces/chat.interface';
 
 import { FirebaseService } from 'src/app/services/firebase/firebase.service';
-import { MessagesComponent } from '../../components/messages/messages.component';
 
 @Component({
   selector: 'app-messages-elderly',
@@ -26,7 +25,7 @@ export class MessagesElderlyComponent implements OnInit, OnDestroy {
   showSave = true;
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize() {
     const width =
       window.innerWidth ||
       document.documentElement.clientWidth ||

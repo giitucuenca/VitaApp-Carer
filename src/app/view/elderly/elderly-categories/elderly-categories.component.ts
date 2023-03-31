@@ -1,13 +1,9 @@
-import {
-  Category,
-  CategoryCarer,
-} from 'src/app/controller/interfaces/category.interface';
+import { CategoryCarer } from 'src/app/controller/interfaces/category.interface';
 import {
   Component,
   OnInit,
   ViewChild,
   ElementRef,
-  ViewChildren,
   AfterViewChecked,
   HostListener,
 } from '@angular/core';

@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireMessaging } from '@angular/fire/messaging';
-import { Router } from '@angular/router';
-import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/messaging';
 import { Subscription } from 'rxjs';
@@ -13,6 +8,7 @@ import { Carer } from 'src/app/controller/interfaces/carer.interface';
 import {
   ChatRoom,
   ContentMessage,
+  OutgoingMessage,
 } from 'src/app/controller/interfaces/chat.interface';
 import { VitaappService } from '../vitaapp/vitaapp.service';
 
@@ -29,14 +25,19 @@ export class FirebaseService {
   currentChatExists = false;
   totalNotRead = 0;
 
-  chatRooms: ChatRoom[] = [];
-  messages: ContentMessage[] = undefined;
-  dataChatRoomSuscriber: Subscription;
-  dataCurrentChatSuscriber: Subscription;
+  incomingChatRooms: ChatRoom[] = [];
+  incomingMessages: ContentMessage[] = undefined;
+
+  outgoingMessages: OutgoingMessage[] = undefined;
+
+  dataIncomingChatRoomSuscriber: Subscription;
+
+  dataCurrentIncomingChatSuscriber: Subscription;
+  dataCurrentOutgoingChatSuscriber: Subscription;
+
   constructor(
     private firestore: AngularFirestore,
     private messaging: AngularFireMessaging,
-    private router: Router,
     private vitaapp: VitaappService
   ) {
     this.messaging.requestToken.subscribe((token) => {
@@ -56,24 +57,23 @@ export class FirebaseService {
     });
   }
 
-  async getChatRooms() {
+  async getIncomingChatRooms() {
     if (!this.chatRoomExists) {
       try {
         const carer: Carer = await this.vitaapp.meInformation().toPromise();
-        this.dataChatRoomSuscriber = this.firestore
+        this.dataIncomingChatRoomSuscriber = this.firestore
           .collection<any>(`messages/${carer.uid}/chatrooms`, (ref) =>
             ref.orderBy('timestamp', 'desc')
           )
           .valueChanges()
           .subscribe((data) => {
-            this.chatRooms = data;
+            this.incomingChatRooms = data;
             this.totalNotRead = 0;
-            this.chatRooms.forEach((room) => {
+            this.incomingChatRooms.forEach((room) => {
               if (!room.read) {
                 this.totalNotRead++;
               }
             });
-            console.log(JSON.stringify(data));
           });
         this.chatRoomExists = true;
       } catch (error) {
@@ -83,34 +83,54 @@ export class FirebaseService {
     }
   }
 
-  getCurrentChat(chatId: string) {
-    if (this.dataCurrentChatSuscriber) {
-      this.dataCurrentChatSuscriber.unsubscribe();
+  getCurrentIncomingChat(chatId: string) {
+    if (this.dataCurrentIncomingChatSuscriber) {
+      this.dataCurrentIncomingChatSuscriber.unsubscribe();
     }
-    this.dataCurrentChatSuscriber = this.firestore
+    this.dataCurrentIncomingChatSuscriber = this.firestore
       .collection(`chatrooms/${chatId}/messages`, (ref) =>
         ref.orderBy('timestamp', 'desc')
       )
       .valueChanges()
       .subscribe((data) => {
-        this.messages = data as ContentMessage[];
-        console.log();
+        this.incomingMessages = data as ContentMessage[];
+      });
+  }
+
+  getCurrentOutgoingChat(incomingChatId: string) {
+    const outgoingChatId = incomingChatId.split('_').reverse().join('_');
+
+    if (this.dataCurrentOutgoingChatSuscriber) {
+      this.dataCurrentOutgoingChatSuscriber.unsubscribe();
+    }
+    this.dataCurrentOutgoingChatSuscriber = this.firestore
+      .collection(`chatrooms/${outgoingChatId}/messages`, (ref) =>
+        ref.orderBy('timestamp', 'desc')
+      )
+      .valueChanges()
+      .subscribe((data) => {
+        this.outgoingMessages = data as OutgoingMessage[];
       });
   }
 
   destroyChat(): void {
-    if (this.dataCurrentChatSuscriber) {
-      this.dataCurrentChatSuscriber.unsubscribe();
+    if (this.dataCurrentIncomingChatSuscriber) {
+      this.dataCurrentIncomingChatSuscriber.unsubscribe();
     }
-    this.messages = undefined;
+    this.incomingMessages = undefined;
+
+    if (this.dataCurrentOutgoingChatSuscriber) {
+      this.dataCurrentOutgoingChatSuscriber.unsubscribe();
+    }
+    this.outgoingMessages = undefined;
   }
 
   reloadData(): void {
     this.totalNotRead = 0;
-    this.chatRooms = [];
+    this.incomingChatRooms = [];
     this.chatRoomExists = false;
-    if (this.dataChatRoomSuscriber) {
-      this.dataChatRoomSuscriber.unsubscribe();
+    if (this.dataIncomingChatRoomSuscriber) {
+      this.dataIncomingChatRoomSuscriber.unsubscribe();
     }
     this.destroyChat();
   }
@@ -154,7 +174,7 @@ export class FirebaseService {
   }
 
   listenNotifications(): void {
-    this.messaging.messages.subscribe((message) => {});
+    this.messaging.messages.subscribe(() => {});
   }
 
   async deleteToken(uid: string) {

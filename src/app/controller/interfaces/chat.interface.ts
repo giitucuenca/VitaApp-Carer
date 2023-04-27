@@ -17,6 +17,11 @@ export interface ContentMessage {
   timestamp: Timestamp;
 }
 
+export interface OutgoingMessage {
+  mensaje: String;
+  timestamp: Timestamp;
+}
+
 export interface MessageElderly {
   imageUrl: string;
   pictogramCarerId: number;

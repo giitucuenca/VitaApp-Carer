@@ -9,6 +9,8 @@ import {
 import { ChatRoom } from 'src/app/controller/interfaces/chat.interface';
 
 import { FirebaseService } from 'src/app/services/firebase/firebase.service';
+import * as firebase from 'firebase';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-messages-elderly',
@@ -18,7 +20,9 @@ import { FirebaseService } from 'src/app/services/firebase/firebase.service';
 export class MessagesElderlyComponent implements OnInit, OnDestroy {
   chatRooms = [];
   chatName = '';
-  // items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
+  incomingChatId = '';
+  outgoingMessage = '';
+
   @ViewChild('messagesContainer')
   messagesContainer: ElementRef<HTMLElement>;
   @ViewChild('usersContainer') usersContainer: ElementRef<HTMLElement>;
@@ -34,7 +38,7 @@ export class MessagesElderlyComponent implements OnInit, OnDestroy {
       const heightCategory =
         this.messagesContainer.nativeElement.clientWidth ||
         this.messagesContainer.nativeElement.clientWidth;
-      // const heigthUser = this.usersContainer.nativeElement.clientHeight || this.usersContainer.nativeElement.clientWidth;
+
       if (!heightCategory) {
         if (this.showSave) {
           this.showSave = false;
@@ -51,7 +55,10 @@ export class MessagesElderlyComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(public firebase: FirebaseService) {}
+  constructor(
+    public firebase: FirebaseService,
+    public firestore: AngularFirestore
+  ) {}
 
   ngOnInit(): void {}
 
@@ -61,8 +68,10 @@ export class MessagesElderlyComponent implements OnInit, OnDestroy {
 
   openChat(chatRoom: ChatRoom) {
     this.chatName = chatRoom.chatName;
+    this.incomingChatId = chatRoom.docId;
     this.firebase.setReadedChatroom(chatRoom);
-    this.firebase.getCurrentChat(chatRoom.docId);
+    this.firebase.getCurrentIncomingChat(chatRoom.docId);
+    this.firebase.getCurrentOutgoingChat(chatRoom.docId);
     this.openMessage();
   }
 
@@ -75,7 +84,7 @@ export class MessagesElderlyComponent implements OnInit, OnDestroy {
       const height =
         this.messagesContainer.nativeElement.clientWidth ||
         this.messagesContainer.nativeElement.clientWidth;
-      // const heigthUser = this.usersContainer.nativeElement.clientHeight || this.usersContainer.nativeElement.clientWidth;
+
       if (!height) {
         this.showSave = true;
         this.messagesContainer.nativeElement.style.width = 100 + '%';
@@ -86,5 +95,34 @@ export class MessagesElderlyComponent implements OnInit, OnDestroy {
         this.usersContainer.nativeElement.style.width = 100 + '%';
       }
     }
+  }
+
+  onCtrlEnter(): void {
+    this.outgoingMessage += '\r';
+  }
+
+  async sendMessage(event: KeyboardEvent): Promise<void> {
+    event.preventDefault();
+
+    const timestamp = firebase.default.firestore.FieldValue.serverTimestamp();
+    const outgoingChatId = this.incomingChatId.split('_').reverse().join('_');
+
+    const doc = await this.firestore
+      .collection('chatrooms')
+      .doc(outgoingChatId)
+      .get()
+      .toPromise();
+    if (!doc.exists) {
+      await this.firestore.collection('chatrooms').doc(outgoingChatId).set({
+        docId: outgoingChatId,
+      });
+    }
+    console.log(this.outgoingMessage);
+    await this.firestore
+      .collection(`chatrooms/${outgoingChatId}/messages`)
+      .add({ mensaje: this.outgoingMessage, timestamp: timestamp });
+    console.log(this.outgoingMessage);
+
+    this.outgoingMessage = '';
   }
 }

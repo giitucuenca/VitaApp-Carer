@@ -3,13 +3,13 @@
     <h4 class="title-container">Adultos Mayores</h4>
     <div
       [ngClass]="!chat.read ? 'user bg-active' : 'user'"
-      *ngFor="let chat of firebase.chatRooms"
+      *ngFor="let chat of firebase.incomingChatRooms"
       (click)="openChat(chat)"
     >
       <strong class="mb-2 d-block">{{ chat.chatName }} </strong>
       <small>mensaje <span *ngIf="!chat.read">no</span> leido</small>
     </div>
-    <div class="not-content" *ngIf="!firebase.chatRooms.length">
+    <div class="not-content" *ngIf="!firebase.incomingChatRooms.length">
       <div class="not-content_icon">
         <i class="pi pi-inbox"></i>
       </div>
@@ -19,37 +19,62 @@
   <div class="messages" #messagesContainer>
     <h4
       class="title-container bg-black text-end mb-0"
-      *ngIf="firebase.messages"
+      *ngIf="firebase.incomingMessages"
     >
       <i class="panel-close fas fa-times" (click)="openMessage()"></i>
       <span>{{ chatName }}</span>
     </h4>
 
-    <cdk-virtual-scroll-viewport
-      itemSize="50"
-      class="pictograms"
-      *ngIf="firebase.messages"
-    >
-      <div
-        class="content__cards mb-2"
-        *cdkVirtualFor="let message of firebase.messages"
-      >
-        <div
-          class="content-pictogram_messages"
-          *ngFor="let pictogram of message.message"
+    <div class="pictograms row" *ngIf="firebase.incomingMessages">
+      <div class="col">
+        <cdk-virtual-scroll-viewport
+          itemSize="50"
+          class="scroll-col"
+          *ngIf="firebase.incomingMessages"
         >
-          <div>
-            <app-card [pictogramView]="pictogram"></app-card>
+          <div
+            class="content__cards mb-2"
+            *cdkVirtualFor="let message of firebase.incomingMessages"
+          >
+            <div
+              class="content-pictogram_messages"
+              *ngFor="let pictogram of message.message"
+            >
+              <app-card [pictogramView]="pictogram"></app-card>
+            </div>
+            <div class="w-100 my-2 pe-2 text-end">
+              {{ message.timestamp.seconds * 1000 | date : "H:mm a" }} |
+              {{ message.timestamp.seconds * 1000 | date : "MMM d" }}
+            </div>
           </div>
-        </div>
-        <div class="w-100 my-2 pe-2 text-end">
-          {{ message.timestamp.seconds * 1000 | date : "H:mm a" }} |
-          {{ message.timestamp.seconds * 1000 | date : "MMM d" }}
-        </div>
+        </cdk-virtual-scroll-viewport>
       </div>
-    </cdk-virtual-scroll-viewport>
+      <div class="col">
+        <cdk-virtual-scroll-viewport class="scroll-col" itemSize="50">
+          <div
+            *ngFor="let message of firebase.outgoingMessages"
+            class="messages"
+          >
+            <p class="text">{{ message.mensaje }}</p>
+            <div class="text-end">
+              {{ message.timestamp.seconds * 1000 | date : "H:mm a" }} |
+              {{ message.timestamp.seconds * 1000 | date : "MMM d" }}
+            </div>
+          </div>
+        </cdk-virtual-scroll-viewport>
+      </div>
+    </div>
+    <div class="container form-group">
+      <textarea
+        class="form-control message-prompt"
+        (keydown.control.enter)="onCtrlEnter()"
+        (keydown.enter)="sendMessage($event)"
+        [(ngModel)]="outgoingMessage"
+      ></textarea>
+    </div>
+
     <div class="container-fluid"></div>
-    <div class="not-content" *ngIf="!firebase.messages">
+    <div class="not-content" *ngIf="!firebase.incomingMessages">
       <div class="not-content_icon">
         <i class="pi pi-inbox"></i>
       </div>

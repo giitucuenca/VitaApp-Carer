@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.firebase.getChatRooms().catch((err) => {
+    this.firebase.getIncomingChatRooms().catch((err) => {
       console.log(err);
     });
   }

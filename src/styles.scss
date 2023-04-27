@@ -312,26 +312,24 @@ input[type="radio"] {
     @include gap-separation;
     width: calc(33.33333% - #{$gap});
     @include respond-xs {
-      width: calc(25% - #{$gap});
+      width: calc(33.33% - #{$gap});
     }
     @include respond-sm {
-      width: calc(20% - #{$gap});
+      width: calc(25% - #{$gap});
     }
 
     @include respond-md {
-      width: calc(20% - #{$gap});
+      width: calc(30% - #{$gap});
     }
 
     @include respond-lg {
-      width: calc(16.6666% - #{$gap});
+      // width: calc(16.6666% - #{$gap});
+      width: calc(25% - #{$gap});
     }
 
     @include respond-xl {
-      width: calc(12.5% - #{$gap});
-    }
-
-    & > div {
-      width: 100%;
+      // width: calc(12.5% - #{$gap});
+      width: calc(25% - #{$gap});
     }
   }
 }

@@ -8,10 +8,7 @@ import {
   Elderly,
   ElderlyCategory,
 } from 'src/app/controller/interfaces/elderly.interface';
-import {
-  Category,
-  CategoryCarer,
-} from 'src/app/controller/interfaces/category.interface';
+import { CategoryCarer } from 'src/app/controller/interfaces/category.interface';
 import { SubcategoryCarer } from 'src/app/controller/interfaces/subcategory.interface';
 import { PictogramCarer } from 'src/app/controller/interfaces/pictogram.interface';
 import { Helper } from 'src/app/controller/interfaces/helper.irterface';
@@ -20,6 +17,7 @@ import { Helper } from 'src/app/controller/interfaces/helper.irterface';
   providedIn: 'root',
 })
 export class VitaappService {
+  // BASE_URL = 'http://localhost:8080/vitaapp/api/v1';
   BASE_URL = 'https://web-production-1ec4.up.railway.app/vitaapp/api/v1';
   httpOptions = {
     headers: new HttpHeaders().set('Content-Type', 'application/json'),

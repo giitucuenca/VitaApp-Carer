@@ -56,11 +56,27 @@ export class SelectCategoriesComponent implements OnInit {
 
   saveListCategories(): void {
     if (this.categoriesCarer.length) {
-      this.vitaapp
-        .saveListCategories(this.categoriesCarer)
-        .subscribe((resp) => {
-          this.showOption();
-        });
+      this.vitaapp.saveListCategories(this.categoriesCarer).subscribe(() => {
+        this.showOption();
+      });
+    }
+  }
+
+  saveAllListCategories(): void {
+    const categoriesCarer = this.categories.map((category) => {
+      return {
+        name: category.name,
+        description: category.description,
+        color: category.color,
+        imageUrl: category.imageUrl,
+        carerId: this.carer.carerId,
+        categoryId: category.categoryId,
+      };
+    });
+    if (categoriesCarer.length) {
+      this.vitaapp.saveAllListCategories(categoriesCarer).subscribe(() => {
+        this.showOption();
+      });
     }
   }
 }

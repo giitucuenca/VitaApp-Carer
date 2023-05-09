@@ -17,8 +17,8 @@ import { Helper } from 'src/app/controller/interfaces/helper.irterface';
   providedIn: 'root',
 })
 export class VitaappService {
-  // BASE_URL = 'http://localhost:8080/vitaapp/api/v1';
-  BASE_URL = 'https://web-production-1ec4.up.railway.app/vitaapp/api/v1';
+  BASE_URL = 'http://localhost:8080/vitaapp/api/v1';
+  // BASE_URL = 'https://web-production-1ec4.up.railway.app/vitaapp/api/v1';
   httpOptions = {
     headers: new HttpHeaders().set('Content-Type', 'application/json'),
   };
@@ -157,6 +157,11 @@ export class VitaappService {
 
   saveListCategories(categories: CategoryCarer[]): Observable<any> {
     const PATH = this.concatURL(`/carer/category/add/list`);
+    return this.makePostRequest(PATH, categories);
+  }
+
+  saveAllListCategories(categories: CategoryCarer[]): Observable<any> {
+    const PATH = this.concatURL(`/carer/category/addAll/list`);
     return this.makePostRequest(PATH, categories);
   }
 

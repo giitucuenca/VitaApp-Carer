@@ -1,15 +1,26 @@
 <div class="header__info">Seleccione</div>
 <section class="global__container">
   <div class="categories__container">
-    <p-splitter [style]="{ height: '100%' }" styleClass="p-mb-5" layout="vertical">
+    <p-splitter
+      [style]="{ height: '100%' }"
+      styleClass="p-mb-5"
+      layout="vertical"
+    >
       <ng-template class="content_global" pTemplate>
         <div class="p-col content_p-panel">
           <div class="h4"><small>Categorías Seleccionadas</small></div>
           <hr />
           <div class="content__cards">
-            <div class="content__card" *ngFor="let category of categoriesCarer; let i = index">
+            <div
+              class="content__card"
+              *ngFor="let category of categoriesCarer; let i = index"
+            >
               <div>
-                <app-card [categoryView]="category" [showClose]="true" (clickDelete)="deleteCategoryCarer(i)">
+                <app-card
+                  [categoryView]="category"
+                  [showClose]="true"
+                  (clickDelete)="deleteCategoryCarer(i)"
+                >
                 </app-card>
               </div>
             </div>
@@ -18,12 +29,20 @@
       </ng-template>
       <ng-template pTemplate>
         <div class="p-col content_p-panel">
-          <div class="h4"><small>Categorías</small></div>
+          <div class="h4">
+            <small>Categorías</small>
+            <button class="ms-4 p-1" (click)="saveAllListCategories()">
+              Agregar todo
+            </button>
+          </div>
           <hr />
           <div class="content__cards">
             <div class="content__card" *ngFor="let category of categories">
               <div>
-                <app-card [categoryView]="category" (clickContent)="addCategoryCarer(category)"></app-card>
+                <app-card
+                  [categoryView]="category"
+                  (clickContent)="addCategoryCarer(category)"
+                ></app-card>
               </div>
             </div>
           </div>
@@ -33,5 +52,9 @@
   </div>
 </section>
 <section class="submenu">
-  <app-submenu [showEdit]="true" (clickEdit)="showOption()" (clickSave)="saveListCategories()"></app-submenu>
+  <app-submenu
+    [showEdit]="true"
+    (clickEdit)="showOption()"
+    (clickSave)="saveListCategories()"
+  ></app-submenu>
 </section>

@@ -55,7 +55,6 @@ export class EditSubcategoriesComponent implements OnInit {
   }
 
   showPictograms(i: number): void {
-    debugger;
     this.router.navigate(['panel/editar-pictogramas', i]);
   }
 
